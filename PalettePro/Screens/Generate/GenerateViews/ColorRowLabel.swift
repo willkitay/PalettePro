@@ -21,7 +21,6 @@ class ColorRowLabel: UILabel {
   func configure() {
     font = .preferredFont(forTextStyle: .headline)
     translatesAutoresizingMaskIntoConstraints = false
-    
   }
   
 }

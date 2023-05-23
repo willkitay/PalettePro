@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ColorRowButton: UIButton {
+class ColorRowLockButton: UIButton {
 
   var isLocked: Bool = false {
     didSet {

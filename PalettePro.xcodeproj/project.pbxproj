@@ -12,8 +12,10 @@
 		D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */; };
 		D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */; };
 		D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA62A1AF97900E27350 /* UIView+Ext.swift */; };
-		D242DFA92A1B23B100E27350 /* ColorRowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA82A1B23B100E27350 /* ColorRowButton.swift */; };
+		D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */; };
 		D242DFAC2A1B311400E27350 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAB2A1B311400E27350 /* Functions.swift */; };
+		D242DFB02A1C49F000E27350 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* Stack.swift */; };
+		D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB12A1C4C8500E27350 /* StackButton.swift */; };
 		D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */; };
 		D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */; };
 		D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */; };
@@ -29,8 +31,10 @@
 		D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowVC.swift; sourceTree = "<group>"; };
 		D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowLabel.swift; sourceTree = "<group>"; };
 		D242DFA62A1AF97900E27350 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
-		D242DFA82A1B23B100E27350 /* ColorRowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowButton.swift; sourceTree = "<group>"; };
+		D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowLockButton.swift; sourceTree = "<group>"; };
 		D242DFAB2A1B311400E27350 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
+		D242DFAF2A1C49F000E27350 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		D242DFB12A1C4C8500E27350 /* StackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackButton.swift; sourceTree = "<group>"; };
 		D2B53BB22A0A1F9600B958D2 /* PalettePro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalettePro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -57,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
+				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
+				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
 				D242DF9D2A1ADD0100E27350 /* GenerateViews */,
 			);
 			path = Generate;
@@ -67,8 +73,7 @@
 			children = (
 				D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */,
 				D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */,
-				D242DFA82A1B23B100E27350 /* ColorRowButton.swift */,
-				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
+				D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */,
 			);
 			path = GenerateViews;
 			sourceTree = "<group>";
@@ -77,6 +82,7 @@
 			isa = PBXGroup;
 			children = (
 				D242DFAB2A1B311400E27350 /* Functions.swift */,
+				D242DFAF2A1C49F000E27350 /* Stack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -226,12 +232,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */,
+				D242DFB02A1C49F000E27350 /* Stack.swift in Sources */,
 				D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */,
-				D242DFA92A1B23B100E27350 /* ColorRowButton.swift in Sources */,
+				D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */,
 				D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */,
 				D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */,
 				D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */,
 				D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */,
+				D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */,
 				D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */,
 				D242DF9F2A1AE5C200E27350 /* UIColor+Ext.swift in Sources */,
 				D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */,
