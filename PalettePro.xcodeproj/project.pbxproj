@@ -16,6 +16,7 @@
 		D242DFAC2A1B311400E27350 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAB2A1B311400E27350 /* Functions.swift */; };
 		D242DFB02A1C49F000E27350 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* Stack.swift */; };
 		D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB12A1C4C8500E27350 /* StackButton.swift */; };
+		D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */; };
 		D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */; };
 		D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */; };
 		D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */; };
@@ -35,6 +36,7 @@
 		D242DFAB2A1B311400E27350 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		D242DFAF2A1C49F000E27350 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		D242DFB12A1C4C8500E27350 /* StackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackButton.swift; sourceTree = "<group>"; };
+		D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailVC.swift; sourceTree = "<group>"; };
 		D2B53BB22A0A1F9600B958D2 /* PalettePro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalettePro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
 				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
 				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
+				D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */,
 				D242DF9D2A1ADD0100E27350 /* GenerateViews */,
 			);
 			path = Generate;
@@ -239,6 +242,7 @@
 				D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */,
 				D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */,
 				D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */,
+				D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */,
 				D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */,
 				D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */,
 				D242DF9F2A1AE5C200E27350 /* UIColor+Ext.swift in Sources */,

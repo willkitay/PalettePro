@@ -16,6 +16,7 @@ class ColorRowVC: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.addSubviews(hexLabel, lockButton)
+    
     generateRandomColor()
     configureLabel()
     configureLockButton()
@@ -24,7 +25,7 @@ class ColorRowVC: UIViewController {
   convenience init(isFirstRowInArray: Bool?) {
     self.init(nibName: nil, bundle: nil)
     self.isTopColorRow = isFirstRowInArray ?? false
-  }
+  }  
   
   func configureLabel() {
     hexLabel.textColor = getContrastTextColor(for: view.backgroundColor)

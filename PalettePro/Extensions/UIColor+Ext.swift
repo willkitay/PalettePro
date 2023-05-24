@@ -9,6 +9,32 @@ import UIKit
 
 extension UIColor {
   
+  func lighter(by percentage: CGFloat = 30.0) -> UIColor? {
+    return self.adjust(by: abs(percentage) )
+  }
+  
+  func darker(by percentage: CGFloat = 30.0) -> UIColor? {
+    return self.adjust(by: -1 * abs(percentage) )
+  }
+  
+  func adjust(by percentage: CGFloat = 30.0) -> UIColor? {
+    guard let components = cgColor.components, components.count >= 3 else {
+      return nil
+    }
+    
+    var r = components[0]
+    var g = components[1]
+    var b = components[2]
+    let a = components[3]
+        
+    // Calculate the adjusted color components
+    r = min(max(r + (percentage / 100.0), 0.0), 1.0)
+    g = min(max(g + (percentage / 100.0), 0.0), 1.0)
+    b = min(max(b + (percentage / 100.0), 0.0), 1.0)
+    
+    return UIColor(red: r, green: g, blue: b, alpha: a)
+  }
+  
   static func generateRandomColor() -> UIColor {
     return UIColor(
       red: CGFloat.random(in: 0...1),
@@ -58,24 +84,20 @@ extension UIColor {
     }
   }
   
-  func toHex() -> String? {
-    guard let components = self.cgColor.components, components.count >= 3 else {
-      return nil
-    }
-    let r = Float(components[0])
-    let g = Float(components[1])
-    let b = Float(components[2])
-    var a = Float(1.0)
-    
-    if components.count >= 4 {
-      a = Float(components[3])
+  func toHex() -> String {
+    let colorSpaceRGB = CGColorSpaceCreateDeviceRGB() // Use RGB color space explicitly
+    guard let color = self.cgColor.converted(to: colorSpaceRGB, intent: .defaultIntent, options: nil),
+          let components = color.components,
+          components.count >= 3 else {
+      return ""
     }
     
-    if a != Float(1.0) {
-      return String(format: "%02lX%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255), lroundf(a * 255))
-    } else {
-      return String(format: "%02lX%02lX%02lX", lroundf(r * 255), lroundf(g * 255), lroundf(b * 255))
-    }
+    let r = components[0]
+    let g = components[1]
+    let b = components[2]
+    
+    let hexString = String(format: "#%02lX%02lX%02lX", lroundf(Float(r * 255)), lroundf(Float(g * 255)), lroundf(Float(b * 255)))
+    return hexString
   }
   
   private static func contrastRatio(between color1: UIColor, and color2: UIColor) -> CGFloat {

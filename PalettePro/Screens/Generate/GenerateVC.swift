@@ -7,7 +7,7 @@
 
 import UIKit
 
-class GenerateVC: UIViewController {
+class GenerateVC: UIViewController, ColorDetailVCDelegate {
 
   var stack = Stack()
   var colorRows: [ColorRowVC] = []
@@ -33,6 +33,24 @@ class GenerateVC: UIViewController {
   private func configureActionBar() {
     generateButton.addTarget(self, action: #selector(generateButtonTapped), for: .touchUpInside)
   }
+  
+  func didSelectColor(oldColor: UIColor?, newColor: UIColor?) {
+    for (index, color) in stack.array[stack.currentIndex].enumerated() {
+      if color.0 == oldColor?.toHex() {
+        stack.array[stack.currentIndex][index].0 = newColor?.toHex() ?? "test"
+      }
+    }
+    
+    guard let newColor else { return }
+    for row in colorRows {
+      if row.hexLabel.text == oldColor?.toHex() {
+        row.updateStackData(with: newColor.toHex(), isLocked: row.lockButton.isLocked)
+        break
+      }
+    }
+    
+    updateColorRowTapGestureDetails()
+  }
 
   @objc func generateButtonTapped() {
     for row in colorRows {
@@ -43,6 +61,7 @@ class GenerateVC: UIViewController {
     stack.push(colorRows.map { ($0.hexLabel.text ?? "", $0.lockButton.isLocked) })
     stack.increment()
     updateArrowButtonsAppearance()
+    updateColorRowTapGestureDetails()
   }
 
   private func configureStackView() {
@@ -53,7 +72,26 @@ class GenerateVC: UIViewController {
     colorRows = [ColorRowVC(isFirstRowInArray: true), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
     
     for row in colorRows { stackView.addArrangedSubview(row.view) }
+    
+    updateColorRowTapGestureDetails()
     stack.push(colorRows.map { ($0.hexLabel.text ?? "", $0.lockButton.isLocked) })
+  }
+  
+  private func updateColorRowTapGestureDetails() {
+    for row in colorRows {
+      let tapGesture = ColorRowTapGestureRecognizer(target: self, action: #selector(colorRowTapped(sender:)))
+      tapGesture.hex = row.hexLabel.text
+      row.view.addGestureRecognizer(tapGesture)
+    }
+  }
+  
+  @objc func colorRowTapped(sender: ColorRowTapGestureRecognizer) {
+    let colorDetailVC = ColorDetailVC(hex: sender.hex)
+    colorDetailVC.delegate = self
+//    colorDetailVC.showBlackDot(on: )
+//    navigationController?.pushViewController(colorDetailVC, animated: true)
+    
+    present(colorDetailVC, animated: true)
   }
   
   @objc func triggerLeftArrowButton() {
@@ -61,6 +99,7 @@ class GenerateVC: UIViewController {
       stack.decrement()
       updateStackViewColors()
       updateArrowButtonsAppearance()
+      updateColorRowTapGestureDetails()
     }
   }
   
@@ -69,6 +108,7 @@ class GenerateVC: UIViewController {
       stack.increment()
       updateStackViewColors()
       updateArrowButtonsAppearance()
+      updateColorRowTapGestureDetails()
     }
   }
   
@@ -122,4 +162,8 @@ class GenerateVC: UIViewController {
       generateButton.heightAnchor.constraint(equalToConstant: 40),
     ])
   }
+}
+
+class ColorRowTapGestureRecognizer: UITapGestureRecognizer {
+  var hex: String?
 }

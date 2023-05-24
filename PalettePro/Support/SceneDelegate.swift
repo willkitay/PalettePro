@@ -14,18 +14,29 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     
     guard let windowScene = (scene as? UIWindowScene) else { return }
-    
+
     window = UIWindow(frame: windowScene.coordinateSpace.bounds)
     window?.windowScene = windowScene
     window?.rootViewController = GenerateVC()
+//    configureNavigationBar()
     window?.makeKeyAndVisible()
     
-    configureNavigationBar()
   }
   
-  func configureNavigationBar() {
-    UINavigationBar.appearance().tintColor = .systemGreen
-  }
+//  func configureNavigationBar() {
+//    let appearance = UINavigationBarAppearance()
+//    appearance.configureWithOpaqueBackground()
+//    appearance.backgroundColor = .white
+//    appearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+//    appearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+//
+//    UINavigationBar.appearance().tintColor = .systemGreen
+//    UINavigationBar.appearance().standardAppearance = appearance
+//    UINavigationBar.appearance().scrollEdgeAppearance = appearance
+//
+//    // Set the navigation bar's prefersLargeTitles property to true
+//    UINavigationBar.appearance().prefersLargeTitles = true
+//  }
   
   func sceneDidDisconnect(_ scene: UIScene) {
     // Called as the scene is being released by the system.
