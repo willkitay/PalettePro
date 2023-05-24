@@ -8,26 +8,83 @@
 import UIKit
 
 protocol ColorDetailVCDelegate: AnyObject {
-  func didSelectColor(oldColor: UIColor?, newColor: UIColor?)
+  func didSelectColor(previousColor: UIColor?, newColor: UIColor?)
 }
 
 class ColorDetailVC: UIViewController {
   
   var currentColorHex: String?
   let stackView = UIStackView()
-  var selectedSubview: UIView?
+  let dotIndicator = DotIndicator()
+  let colorPercentChange = 7
+  let numberOfRows = 5
   
   weak var delegate: ColorDetailVCDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
     configureStackView()
-    showBlackDot(on: stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex }))
+    showBlackDotOnCurrentColor()
   }
   
   convenience init(hex: String?) {
     self.init(nibName: nil, bundle: nil)
     self.currentColorHex = hex
+  }
+  
+  private func showBlackDotOnCurrentColor() {
+    showBlackDot(on: stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex }))
+  }
+  
+  private func configureStackView() {
+    view.addSubview(stackView)
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    stackView.axis = .vertical
+    stackView.distribution = .fillEqually
+
+    addTintColorsToStack()
+    addCurrentColorToStack()
+    addShadeColorsToStack()
+    
+    NSLayoutConstraint.activate([
+      stackView.topAnchor.constraint(equalTo: view.topAnchor),
+      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+    ])
+    
+    addTapGestureToStackColors()
+  }
+  
+  private func addTintColorsToStack() {
+    for i in (1..<numberOfRows).reversed() {
+      let tintedColor = UIColor(hex: currentColorHex ?? "")?.lighter(by: CGFloat(i * colorPercentChange))
+      
+      guard tintedColor?.toHex() != UIColor.white.toHex() else { return }
+      stackView.addArrangedSubview(createColorRowSubView(with: tintedColor))
+    }
+  }
+  
+  private func addShadeColorsToStack() {
+    for i in (1..<numberOfRows) {
+      let shadedColor = UIColor(hex: currentColorHex ?? "")?.darker(by: CGFloat(i * colorPercentChange))
+      
+      guard shadedColor?.toHex() != UIColor.black.toHex() else { return }
+      stackView.addArrangedSubview(createColorRowSubView(with: shadedColor))
+    }
+  }
+  
+  private func addCurrentColorToStack() {
+    guard let currentColorHex else { return }
+    stackView.addArrangedSubview(createColorRowSubView(with: UIColor(hex: currentColorHex)))
+  }
+  
+  private func addTapGestureToStackColors() {
+    for subview in stackView.arrangedSubviews {
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(subviewTapped(_:)))
+      subview.isUserInteractionEnabled = true
+      subview.addGestureRecognizer(tapGesture)
+    }
   }
   
   private func createColorRowSubView(with color: UIColor?) -> UIView {
@@ -36,80 +93,40 @@ class ColorDetailVC: UIViewController {
     return subview
   }
   
-  private func configureStackView() {
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    stackView.axis = .vertical
-    stackView.distribution = .fillEqually
-
-    let colorPercentChange = 7
-    let numberOfRows = 10
-    
-    for i in (1..<numberOfRows).reversed() {
-      let tintedColor = UIColor(hex: currentColorHex ?? "")?.lighter(by: CGFloat(i * colorPercentChange))
-      stackView.addArrangedSubview(createColorRowSubView(with: tintedColor))
-    }
-
-    stackView.addArrangedSubview(createColorRowSubView(with: UIColor(hex: currentColorHex ?? "")))
-    
-    for i in (1..<numberOfRows) {
-      let shadedColor = UIColor(hex: currentColorHex ?? "")?.darker(by: CGFloat(i * colorPercentChange))
-      stackView.addArrangedSubview(createColorRowSubView(with: shadedColor))
-    }
-
-    view.addSubview(stackView)
-    NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.topAnchor),
-      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ])
-    
-    for subview in stackView.arrangedSubviews {
-      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(subviewTapped(_:)))
-      subview.isUserInteractionEnabled = true
-      subview.addGestureRecognizer(tapGesture)
-    }
-  }
-  
   @objc private func subviewTapped(_ gesture: UITapGestureRecognizer) {
-    guard let tappedView = gesture.view else { return }
     guard let currentColorHex else { return }
+    guard let tappedView = gesture.view else { return }
+    guard let newCGColor = tappedView.backgroundColor?.cgColor else { return }
+
+    let previousColor = UIColor(hex: currentColorHex)
+    let newColor = UIColor(cgColor: newCGColor)
+    delegate?.didSelectColor(previousColor: previousColor, newColor: newColor)
+    self.currentColorHex = newColor.toHex()
     
     showBlackDot(on: tappedView)
-    
-    guard let cgColor = tappedView.backgroundColor?.cgColor else { return }
-    let newColor = UIColor(cgColor: cgColor)
-    
-    delegate?.didSelectColor(oldColor: UIColor(hex: currentColorHex), newColor: newColor)
-    self.currentColorHex = newColor.toHex()
   }
   
   func showBlackDot(on subview: UIView?) {
-    guard let subview else { return }
+    guard let subview = subview else { return }
+    removeOldDot()
     
-    for view in stackView.arrangedSubviews {
-      if let dotView = view.subviews.first(where: { $0.backgroundColor == .black }) {
-        dotView.removeFromSuperview()
-      }
-    }
-    
-    let dotView = createBlackDotView()
-    subview.addSubview(dotView)
+    dotIndicator.backgroundColor = getContrastTextColor(for: subview.backgroundColor)
+    subview.addSubview(dotIndicator)
+    dotIndicator.translatesAutoresizingMaskIntoConstraints = false
     
     NSLayoutConstraint.activate([
-      dotView.centerXAnchor.constraint(equalTo: subview.centerXAnchor),
-      dotView.centerYAnchor.constraint(equalTo: subview.centerYAnchor),
+      dotIndicator.centerYAnchor.constraint(equalTo: subview.centerYAnchor),
+      dotIndicator.centerXAnchor.constraint(equalTo: subview.centerXAnchor)
     ])
   }
   
-  private func createBlackDotView() -> UIView {
-    let dotView = UIView()
-    dotView.backgroundColor = .black
-    dotView.layer.cornerRadius = 5.0
-    dotView.translatesAutoresizingMaskIntoConstraints = false
-    dotView.widthAnchor.constraint(equalToConstant: 10.0).isActive = true
-    dotView.heightAnchor.constraint(equalToConstant: 10.0).isActive = true
-    return dotView
+  private func removeOldDot() {
+    for view in stackView.arrangedSubviews {
+      if let dotView = view.subviews.first(where: { $0 is DotIndicator }) {
+        dotView.removeFromSuperview()
+        break
+      }
+    }
   }
 
 }

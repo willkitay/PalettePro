@@ -17,6 +17,7 @@
 		D242DFB02A1C49F000E27350 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* Stack.swift */; };
 		D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB12A1C4C8500E27350 /* StackButton.swift */; };
 		D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */; };
+		D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */; };
 		D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */; };
 		D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */; };
 		D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */; };
@@ -37,6 +38,7 @@
 		D242DFAF2A1C49F000E27350 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
 		D242DFB12A1C4C8500E27350 /* StackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackButton.swift; sourceTree = "<group>"; };
 		D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailVC.swift; sourceTree = "<group>"; };
+		D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
 		D2B53BB22A0A1F9600B958D2 /* PalettePro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalettePro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D2B53BB72A0A1F9600B958D2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,9 +65,10 @@
 			isa = PBXGroup;
 			children = (
 				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
+				D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */,
+				D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */,
 				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
 				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
-				D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */,
 				D242DF9D2A1ADD0100E27350 /* GenerateViews */,
 			);
 			path = Generate;
@@ -235,6 +238,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */,
+				D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */,
 				D242DFB02A1C49F000E27350 /* Stack.swift in Sources */,
 				D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */,
 				D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */,

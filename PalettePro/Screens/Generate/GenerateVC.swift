@@ -34,16 +34,16 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate {
     generateButton.addTarget(self, action: #selector(generateButtonTapped), for: .touchUpInside)
   }
   
-  func didSelectColor(oldColor: UIColor?, newColor: UIColor?) {
+  func didSelectColor(previousColor: UIColor?, newColor: UIColor?) {
     for (index, color) in stack.array[stack.currentIndex].enumerated() {
-      if color.0 == oldColor?.toHex() {
+      if color.0 == previousColor?.toHex() {
         stack.array[stack.currentIndex][index].0 = newColor?.toHex() ?? "test"
       }
     }
     
     guard let newColor else { return }
     for row in colorRows {
-      if row.hexLabel.text == oldColor?.toHex() {
+      if row.hexLabel.text == previousColor?.toHex() {
         row.updateStackData(with: newColor.toHex(), isLocked: row.lockButton.isLocked)
         break
       }
