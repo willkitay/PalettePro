@@ -65,12 +65,11 @@ class ColorDetailVC: UIViewController {
   
   private func addTintColorsToStack() {
     guard let currentColorHex else { return }
-    let whiteHex = UIColor.white.toHex()
     var index = 0
     var currentColor = UIColor(hex: currentColorHex)
     var colorSubviews: [UIView] = []
     
-    while currentColor?.toHex() != whiteHex {
+    while currentColor?.toHex() != UIColor.white.toHex() && index < 6 {
       index += 1
       currentColor = currentColor?.lighter(by: CGFloat(index * colorPercentChange))
       colorSubviews.append(createColorRowSubView(with: currentColor))
@@ -81,11 +80,10 @@ class ColorDetailVC: UIViewController {
 
   private func addShadeColorsToStack() {
     guard let currentColorHex else { return }
-    let blackHex = UIColor.black.toHex()
     var index = 0
     var currentColor = UIColor(hex: currentColorHex)
     
-    while currentColor?.toHex() != blackHex {
+    while currentColor?.toHex() != UIColor.black.toHex() && index < 6 {
       index += 1
       currentColor = currentColor?.darker(by: CGFloat(index * colorPercentChange))
       stackView.addArrangedSubview(createColorRowSubView(with: currentColor))
