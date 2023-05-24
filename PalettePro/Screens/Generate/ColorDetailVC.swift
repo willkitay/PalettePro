@@ -16,8 +16,7 @@ class ColorDetailVC: UIViewController {
   var currentColorHex: String?
   let stackView = UIStackView()
   let dotIndicator = DotIndicator()
-  let colorPercentChange = 7
-  let numberOfRows = 5
+  let colorPercentChange = 2
   
   weak var delegate: ColorDetailVCDelegate?
   
@@ -42,10 +41,11 @@ class ColorDetailVC: UIViewController {
     stackView.axis = .vertical
     stackView.distribution = .fillEqually
 
-    addTintColorsToStack()
-    addCurrentColorToStack()
-    addShadeColorsToStack()
-    
+    addColors()
+//    addTintColorsToStack()
+//    addCurrentColorToStack()
+//    addShadeColorsToStack()
+//
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.topAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -56,21 +56,39 @@ class ColorDetailVC: UIViewController {
     addTapGestureToStackColors()
   }
   
-  private func addTintColorsToStack() {
-    for i in (1..<numberOfRows).reversed() {
-      let tintedColor = UIColor(hex: currentColorHex ?? "")?.lighter(by: CGFloat(i * colorPercentChange))
-      
-      guard tintedColor?.toHex() != UIColor.white.toHex() else { return }
-      stackView.addArrangedSubview(createColorRowSubView(with: tintedColor))
-    }
+  private func addColors() {
+    addTintColorsToStack()
+    addCurrentColorToStack()
+    addShadeColorsToStack()
   }
   
+  
+  private func addTintColorsToStack() {
+    guard let currentColorHex else { return }
+    let whiteHex = UIColor.white.toHex()
+    var index = 0
+    var currentColor = UIColor(hex: currentColorHex)
+    var colorSubviews: [UIView] = []
+    
+    while currentColor?.toHex() != whiteHex {
+      index += 1
+      currentColor = currentColor?.lighter(by: CGFloat(index * colorPercentChange))
+      colorSubviews.append(createColorRowSubView(with: currentColor))
+    }
+    
+    for colorSubview in colorSubviews.reversed() { stackView.addArrangedSubview(colorSubview) }
+  }
+
   private func addShadeColorsToStack() {
-    for i in (1..<numberOfRows) {
-      let shadedColor = UIColor(hex: currentColorHex ?? "")?.darker(by: CGFloat(i * colorPercentChange))
-      
-      guard shadedColor?.toHex() != UIColor.black.toHex() else { return }
-      stackView.addArrangedSubview(createColorRowSubView(with: shadedColor))
+    guard let currentColorHex else { return }
+    let blackHex = UIColor.black.toHex()
+    var index = 0
+    var currentColor = UIColor(hex: currentColorHex)
+    
+    while currentColor?.toHex() != blackHex {
+      index += 1
+      currentColor = currentColor?.darker(by: CGFloat(index * colorPercentChange))
+      stackView.addArrangedSubview(createColorRowSubView(with: currentColor))
     }
   }
   
