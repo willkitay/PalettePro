@@ -32,7 +32,7 @@ class ColorDetailVC: UIViewController {
   }
   
   private func showBlackDotOnCurrentColor() {
-    showBlackDot(on: stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex }))
+    dotIndicator.setDotIndicator(on: stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex }))
   }
   
   private func configureStackView() {
@@ -42,10 +42,7 @@ class ColorDetailVC: UIViewController {
     stackView.distribution = .fillEqually
 
     addColors()
-//    addTintColorsToStack()
-//    addCurrentColorToStack()
-//    addShadeColorsToStack()
-//
+
     NSLayoutConstraint.activate([
       stackView.topAnchor.constraint(equalTo: view.topAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -119,30 +116,7 @@ class ColorDetailVC: UIViewController {
     delegate?.didSelectColor(previousColor: previousColor, newColor: newColor)
     self.currentColorHex = newColor.toHex()
     
-    showBlackDot(on: tappedView)
+    dotIndicator.setDotIndicator(on: tappedView)
   }
   
-  func showBlackDot(on subview: UIView?) {
-    guard let subview = subview else { return }
-    removeOldDot()
-    
-    dotIndicator.backgroundColor = getContrastTextColor(for: subview.backgroundColor)
-    subview.addSubview(dotIndicator)
-    dotIndicator.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      dotIndicator.centerYAnchor.constraint(equalTo: subview.centerYAnchor),
-      dotIndicator.centerXAnchor.constraint(equalTo: subview.centerXAnchor)
-    ])
-  }
-  
-  private func removeOldDot() {
-    for view in stackView.arrangedSubviews {
-      if let dotView = view.subviews.first(where: { $0 is DotIndicator }) {
-        dotView.removeFromSuperview()
-        break
-      }
-    }
-  }
-
 }

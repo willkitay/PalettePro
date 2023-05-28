@@ -37,7 +37,6 @@ class StackButton: UIButton {
   }
   
   func configure() {
-    
     let imageName = direction == .left ? "arrow.left" : "arrow.right"
     setImage(UIImage(systemName: imageName)?.withTintColor(.label, renderingMode: .alwaysOriginal), for: .normal)
     setImage(UIImage(systemName: imageName)?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), for: .highlighted)

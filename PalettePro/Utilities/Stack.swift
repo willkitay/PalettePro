@@ -16,6 +16,10 @@ struct Stack {
     array.append(element)
   }
   
+  mutating func updateColorCount(_ element: [(String, Bool)]) {
+    array[currentIndex].append(contentsOf: element)
+  }
+  
   func currentColors() -> [(String, Bool)] {
     return array[currentIndex]
   }

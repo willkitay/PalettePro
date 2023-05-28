@@ -21,7 +21,6 @@ class DotIndicator: UIView {
   }
   
   func configure() {
-//    backgroundColor = .black
     layer.cornerRadius = 5.0
     translatesAutoresizingMaskIntoConstraints = false
     
@@ -30,6 +29,19 @@ class DotIndicator: UIView {
       centerYAnchor.constraint(equalTo: centerYAnchor),
       widthAnchor.constraint(equalToConstant: 10.0),
       heightAnchor.constraint(equalToConstant: 10.0)
+    ])
+  }
+  
+  func setDotIndicator(on subview: UIView?) {
+    guard let subview = subview else { return }
+    
+    self.backgroundColor = getContrastTextColor(for: subview.backgroundColor)
+    subview.addSubview(self)
+    self.translatesAutoresizingMaskIntoConstraints = false
+    
+    NSLayoutConstraint.activate([
+      self.centerYAnchor.constraint(equalTo: subview.centerYAnchor),
+      self.centerXAnchor.constraint(equalTo: subview.centerXAnchor)
     ])
   }
   

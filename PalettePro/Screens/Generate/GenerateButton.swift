@@ -25,5 +25,6 @@ class GenerateButton: UIButton {
     setTitleColor(.lightGray, for: .highlighted)
     contentVerticalAlignment = .bottom
     translatesAutoresizingMaskIntoConstraints = false
+    clipsToBounds = true
   }
 }
