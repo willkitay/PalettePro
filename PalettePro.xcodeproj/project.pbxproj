@@ -14,7 +14,7 @@
 		D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA62A1AF97900E27350 /* UIView+Ext.swift */; };
 		D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */; };
 		D242DFAC2A1B311400E27350 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAB2A1B311400E27350 /* Functions.swift */; };
-		D242DFB02A1C49F000E27350 /* Stack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* Stack.swift */; };
+		D242DFB02A1C49F000E27350 /* ColorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* ColorStack.swift */; };
 		D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB12A1C4C8500E27350 /* StackButton.swift */; };
 		D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */; };
 		D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */; };
@@ -40,7 +40,7 @@
 		D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */; };
 		D2B53BBF2A0A1F9700B958D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */; };
 		D2B53BC22A0A1F9700B958D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BC02A0A1F9700B958D2 /* LaunchScreen.storyboard */; };
-		D2CBD94B2A1AB8AD00D42AA1 /* ViewControllerTwo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* ViewControllerTwo.swift */; };
+		D2CBD94B2A1AB8AD00D42AA1 /* SystemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */; };
 		D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -52,7 +52,7 @@
 		D242DFA62A1AF97900E27350 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowLockButton.swift; sourceTree = "<group>"; };
 		D242DFAB2A1B311400E27350 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
-		D242DFAF2A1C49F000E27350 /* Stack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stack.swift; sourceTree = "<group>"; };
+		D242DFAF2A1C49F000E27350 /* ColorStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStack.swift; sourceTree = "<group>"; };
 		D242DFB12A1C4C8500E27350 /* StackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackButton.swift; sourceTree = "<group>"; };
 		D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailVC.swift; sourceTree = "<group>"; };
 		D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2B53BC12A0A1F9700B958D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2B53BC32A0A1F9700B958D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2CBD94A2A1AB8AD00D42AA1 /* ViewControllerTwo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTwo.swift; sourceTree = "<group>"; };
+		D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemVC.swift; sourceTree = "<group>"; };
 		D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTabBarControllerViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -123,7 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				D242DFAB2A1B311400E27350 /* Functions.swift */,
-				D242DFAF2A1C49F000E27350 /* Stack.swift */,
+				D242DFAF2A1C49F000E27350 /* ColorStack.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -191,7 +191,6 @@
 				D2CBD9502A1ABA8400D42AA1 /* TabBarControllers */,
 				D2CBD9492A1AB72B00D42AA1 /* Support */,
 				D2CBD9482A1AB71F00D42AA1 /* Screens */,
-				D2CBD94A2A1AB8AD00D42AA1 /* ViewControllerTwo.swift */,
 				D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */,
 				D2B53BC02A0A1F9700B958D2 /* LaunchScreen.storyboard */,
 				D2B53BC32A0A1F9700B958D2 /* Info.plist */,
@@ -203,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				D242DF982A1AC29E00E27350 /* Generate */,
+				D2FF82AB2A241A6500978A62 /* System */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -240,6 +240,14 @@
 				D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */,
 			);
 			path = TabBarControllers;
+			sourceTree = "<group>";
+		};
+		D2FF82AB2A241A6500978A62 /* System */ = {
+			isa = PBXGroup;
+			children = (
+				D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */,
+			);
+			path = System;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,7 +330,7 @@
 				D2A116072A2281C600BD85B5 /* FromHex.swift in Sources */,
 				D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */,
 				D2A1160F2A22B67700BD85B5 /* ColorCombos.swift in Sources */,
-				D242DFB02A1C49F000E27350 /* Stack.swift in Sources */,
+				D242DFB02A1C49F000E27350 /* ColorStack.swift in Sources */,
 				D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */,
 				D2A116032A22816800BD85B5 /* LighterOrDarker.swift in Sources */,
 				D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */,
@@ -340,7 +348,7 @@
 				D242DF9F2A1AE5C200E27350 /* RGB.swift in Sources */,
 				D2A1160B2A22827F00BD85B5 /* ContrastRatio.swift in Sources */,
 				D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */,
-				D2CBD94B2A1AB8AD00D42AA1 /* ViewControllerTwo.swift in Sources */,
+				D2CBD94B2A1AB8AD00D42AA1 /* SystemVC.swift in Sources */,
 				D242DFAC2A1B311400E27350 /* Functions.swift in Sources */,
 				D2A115F22A1EFE8A00BD85B5 /* Constants.swift in Sources */,
 				D2A115FA2A20201900BD85B5 /* PaletteTabBar.swift in Sources */,

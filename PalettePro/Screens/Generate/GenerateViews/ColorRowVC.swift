@@ -45,7 +45,7 @@ class ColorRowVC: UIViewController {
     ])
   }
   
-  func updateStackData(with hex: String, isLocked: Bool) {
+  func updateStack(with hex: String, isLocked: Bool) {
     view.backgroundColor = UIColor(hex: hex)
     updateLabel()
     lockButton.isLocked = isLocked

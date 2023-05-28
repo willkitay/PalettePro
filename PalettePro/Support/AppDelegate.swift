@@ -19,8 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func configureTabBar() {
     if #available(iOS 15, *) {
       let appearance = UITabBarAppearance()
-//      UITabBar.appearance().isTranslucent = true
-      UITabBar.appearance().standardAppearance = appearance
+      appearance.configureWithOpaqueBackground()
+      appearance.backgroundColor = .systemBackground
       UITabBar.appearance().scrollEdgeAppearance = appearance
     }
   }
@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func configureNavBar() {
     if #available(iOS 15, *) {
       let appearance = UINavigationBarAppearance()
-//      UITabBar.appearance().isTranslucent = true
       UINavigationBar.appearance().standardAppearance = appearance
       UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }

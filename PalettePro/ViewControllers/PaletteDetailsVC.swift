@@ -55,6 +55,7 @@ class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDeleg
     super.viewDidLoad()
     guard let defaultColor = UIColor(hex: colors.first ?? "") else { return }
     view.backgroundColor = defaultColor
+    navigationController?.navigationBar.prefersLargeTitles = false
     
     configureColorCodeRows()
     configureColorCombos()

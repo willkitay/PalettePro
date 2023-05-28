@@ -32,7 +32,8 @@ class ColorDetailVC: UIViewController {
   }
   
   private func showBlackDotOnCurrentColor() {
-    dotIndicator.setDotIndicator(on: stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex }))
+    let subview = stackView.arrangedSubviews.first(where: { $0.backgroundColor?.toHex() == currentColorHex })
+    dotIndicator.setDotIndicator(on: subview)
   }
   
   private func configureStackView() {
@@ -94,7 +95,7 @@ class ColorDetailVC: UIViewController {
   
   private func addTapGestureToStackColors() {
     for subview in stackView.arrangedSubviews {
-      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(subviewTapped(_:)))
+      let tapGesture = UITapGestureRecognizer(target: self, action: #selector(subviewTapped))
       subview.isUserInteractionEnabled = true
       subview.addGestureRecognizer(tapGesture)
     }

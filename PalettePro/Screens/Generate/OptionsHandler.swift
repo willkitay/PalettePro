@@ -8,11 +8,13 @@
 import UIKit
 
 protocol OptionsHandlerDelegate: AnyObject {
-  func viewPalette()
-  func savePalette()
-  func exportPalette()
+  var currentNumberOfRows: Int { get }
+  
   func addColor()
   func removeColor()
+  func viewPalette()
+  func exportPalette()
+  func canRemoveColor() -> Bool
 }
 
 enum ButtonOption {
@@ -24,39 +26,55 @@ enum ButtonOption {
 }
 
 class OptionsHandler: NSObject {
+  
   weak var delegate: OptionsHandlerDelegate?
-  let maxNumberOfRows = Constants.maxNumberOfRows
+  
+  var buttons: [UIAlertAction] = []
   
   func showOptions(from viewController: UIViewController, sourceView: UIView) {
+    buttons.removeAll()
+    
     let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     actionSheet.view.tintColor = .label
     
-    let buttons = [
-      UIAlertAction(title: ButtonOption.viewPalette, style: .default, handler: { _ in
-        self.delegate?.viewPalette()
-      }),
-//      UIAlertAction(title: ButtonOption.savePalette, style: .default, handler: { _ in
-//        self.delegate?.savePalette()
-//      }),
-      UIAlertAction(title: ButtonOption.exportPalette, style: .default, handler: { _ in
-        self.delegate?.exportPalette()
-      }),
-      UIAlertAction(title: ButtonOption.addColor, style: .default, handler: { _ in
-        self.delegate?.addColor()
-      }),
-      UIAlertAction(title: ButtonOption.removeColor, style: .default, handler: { _ in
-        self.delegate?.removeColor()
-      })
-    ]
+    viewPaletteButton()
+    exportPaletteButton()
+    addColorButton()
+    removeColorButton()
     
-    for button in buttons {
-      actionSheet.addAction(button)
-    }
+    for button in buttons { actionSheet.addAction(button) }
     
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
     actionSheet.addAction(cancelAction)
     
     viewController.present(actionSheet, animated: true)
   }
+  
+  private func viewPaletteButton() {
+    buttons.append(UIAlertAction(title: ButtonOption.viewPalette, style: .default, handler: { _ in
+      self.delegate?.viewPalette()
+    }))
+  }
+  
+  private func exportPaletteButton() {
+    buttons.append(UIAlertAction(title: ButtonOption.exportPalette, style: .default, handler: { _ in
+      self.delegate?.exportPalette()
+    }))
+  }
+  
+  private func removeColorButton() {
+    if delegate?.currentNumberOfRows ?? 0 > 2 && ((delegate?.canRemoveColor()) == true) {
+      buttons.append(UIAlertAction(title: ButtonOption.removeColor, style: .default, handler: { _ in
+        self.delegate?.removeColor()
+      }))
+    }
+  }
+  
+  private func addColorButton() {
+    if delegate?.currentNumberOfRows != Constants.maxNumberOfRows {
+      buttons.append(UIAlertAction(title: ButtonOption.addColor, style: .default, handler: { _ in
+        self.delegate?.addColor()
+      }))
+    }
+  }
 }
-

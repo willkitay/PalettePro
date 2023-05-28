@@ -23,7 +23,6 @@ class GenerateButton: UIButton {
     setTitle("Generate", for: .normal)
     setTitleColor(.label, for: .normal)
     setTitleColor(.lightGray, for: .highlighted)
-    contentVerticalAlignment = .bottom
     translatesAutoresizingMaskIntoConstraints = false
     clipsToBounds = true
   }

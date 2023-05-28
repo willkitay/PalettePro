@@ -11,22 +11,37 @@ class PTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    UITabBar.appearance().tintColor = .systemGreen
-    viewControllers = [createVCOneNC()]
+    UITabBar.appearance().tintColor = .label
+    
+    viewControllers = [createGenerateVC(), createSystem(), createFavoritesVC(), createAIVC()]
+    selectedViewController = viewControllers?[0]
   }
   
-  func createVCOneNC() -> UINavigationController {
-    let vcOne = GenerateVC()
-    vcOne.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 0)
-    return UINavigationController(rootViewController: vcOne)
+  func createAIVC() -> UINavigationController {
+    let aiVC = SystemVC()
+    aiVC.tabBarItem = UITabBarItem(title: "AI", image: UIImage(systemName: "waveform"), tag: 0)
+    
+    return UINavigationController(rootViewController: aiVC)
   }
   
-//  func createVCTwoNC() -> UINavigationController {
-//    let vcTwo = ViewControllerTwo()
-//
-//    vcTwo.title = "Two"
-//    vcTwo.tabBarItem = UITabBarItem(tabBarSystemItem: .history, tag: 0)
-//
-//    return UINavigationController(rootViewController: vcTwo)
-//  }
+  func createGenerateVC() -> UINavigationController {
+    let generateVC = GenerateVC()
+    generateVC.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "swatchpalette"), tag: 2)
+    
+    return UINavigationController(rootViewController: generateVC)
+  }
+  
+  func createSystem() -> UINavigationController {
+    let systemVC = SystemVC()
+    systemVC.tabBarItem = UITabBarItem(title: "System", image: UIImage(systemName: "iphone"), tag: 1)
+    
+    return UINavigationController(rootViewController: systemVC)
+  }
+  
+  func createFavoritesVC() -> UINavigationController {
+    let favoritesVC = SystemVC()
+    favoritesVC.tabBarItem = UITabBarItem(title: "Saved", image: UIImage(systemName: "star"), tag: 3)
+    
+    return UINavigationController(rootViewController: favoritesVC)
+  }
 }
