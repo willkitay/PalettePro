@@ -9,7 +9,7 @@ import UIKit
 
 import UIKit
 
-class CopyAlert: UIViewController {
+class CopyAlertVC: UIViewController {
   
   let backgroundView = UIView()
   let actionButton = UIButton()

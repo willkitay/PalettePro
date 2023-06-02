@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PaletteTabBarDelegate: AnyObject {
+  func selectColor(_ color: UIColor?)
+}
+
 class PaletteTabBar: UIView {
   
   weak var delegate: PaletteTabBarDelegate?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ColorRowLockButton: UIButton {
+class LockButton: UIButton {
 
   var isLocked: Bool = false {
     didSet {
@@ -25,16 +25,16 @@ class ColorRowLockButton: UIButton {
   }
   
   override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
-    let extendedBounds = bounds.insetBy(dx: -30, dy: -30)
+    let extendedBounds = bounds.insetBy(dx: -20, dy: -20)
     return extendedBounds.contains(point)
   }
   
   func configure() {
     addTarget(self, action: #selector(toggleLock), for: .touchUpInside)
     
-    let configuration = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: isLocked ? .title1 : .title2))
+    let configuration = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .title2))
     let imageName = isLocked ? "lock.fill" : "lock.open.fill"
-    let lockColor: UIColor = isLocked ? getContrastTextColor(for: superview?.backgroundColor) : .systemGray4.withAlphaComponent(0.6)
+    let lockColor: UIColor = isLocked ? getContrastTextColor(for: superview?.backgroundColor) : .systemGray4
     
     let lockImage = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(lockColor, renderingMode: .alwaysOriginal)
     setBackgroundImage(lockImage, for: .normal)

@@ -7,14 +7,6 @@
 
 import UIKit
 
-protocol PaletteTabBarDelegate: AnyObject {
-  func selectColor(_ color: UIColor?)
-}
-
-protocol ColorComboDelegate: AnyObject {
-  func copyColorComboCode()
-}
-
 class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDelegate {
   
   var colors: [String] = []
@@ -24,7 +16,7 @@ class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDeleg
   private let stackView = UIStackView()
   private let bottomBar = UIView()
   
-  private let tabBar = PaletteTabBar()
+  let tabBar = PaletteTabBar()
   
   private let complementaryCombo = ColorCombo(title: "complementary colors")
   private let analogousCombo = ColorCombo(title: "analogous colors")
@@ -56,6 +48,7 @@ class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDeleg
     guard let defaultColor = UIColor(hex: colors.first ?? "") else { return }
     view.backgroundColor = defaultColor
     navigationController?.navigationBar.prefersLargeTitles = false
+    title = colors.count > 1 ? "Palette Details" : "Color Details"
     
     configureColorCodeRows()
     configureColorCombos()
@@ -184,12 +177,13 @@ class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDeleg
     containerView.addSubview(bottomBar)
     bottomBar.backgroundColor = .systemBackground
     bottomBar.translatesAutoresizingMaskIntoConstraints = false
-    
+
+    let bottomBarHeight: CGFloat = colors.count > 1 ? 90 : 0
     NSLayoutConstraint.activate([
-      bottomBar.topAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -90),
       bottomBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
       bottomBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-      bottomBar.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
+      bottomBar.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+      bottomBar.heightAnchor.constraint(equalToConstant: bottomBarHeight),
     ])
   }
   
@@ -206,6 +200,7 @@ class PaletteDetailsVC: UIViewController, PaletteTabBarDelegate, ColorComboDeleg
   }
   
   func configureTabBar() {
+    guard colors.count > 1 else { return }
     containerView.addSubview(tabBar)
     tabBar.delegate = self
     tabBar.setTabBarColors(colors)

@@ -11,7 +11,7 @@ protocol ColorDetailVCDelegate: AnyObject {
   func didSelectColor(previousColor: UIColor?, newColor: UIColor?)
 }
 
-class ColorDetailVC: UIViewController {
+class ColorPickerVC: UIViewController {
   
   var currentColorHex: String?
   let stackView = UIStackView()

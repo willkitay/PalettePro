@@ -7,10 +7,15 @@
 
 import UIKit
 
+protocol ColorComboDelegate: AnyObject {
+  func copyColorComboCode()
+}
+
 class ColorCombo: UIStackView {
   
   weak var delegate: ColorComboDelegate?
   var background: UIColor!
+  var colors: [UIColor] = []
   
   private let containerView = UIView()
   private let horizontalStack = UIStackView()
@@ -38,6 +43,7 @@ class ColorCombo: UIStackView {
   }
   
   func set(colors: [UIColor]) {
+    self.colors = colors
     horizontalStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     titleLabel.textColor = getContrastTextColor(for: background).withAlphaComponent(0.5)
     

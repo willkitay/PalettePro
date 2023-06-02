@@ -12,9 +12,10 @@ protocol OptionsHandlerDelegate: AnyObject {
   
   func addColor()
   func removeColor()
-  func viewPalette()
+  func viewPalette(hexColors: [String])
   func exportPalette()
   func canRemoveColor() -> Bool
+  func savePalette()
 }
 
 enum ButtonOption {
@@ -25,7 +26,7 @@ enum ButtonOption {
   static let removeColor = String("Remove Color")
 }
 
-class OptionsHandler: NSObject {
+class OptionsManager: NSObject {
   
   weak var delegate: OptionsHandlerDelegate?
   
@@ -38,6 +39,7 @@ class OptionsHandler: NSObject {
     actionSheet.view.tintColor = .label
     
     viewPaletteButton()
+    savePalette()
     exportPaletteButton()
     addColorButton()
     removeColorButton()
@@ -50,9 +52,15 @@ class OptionsHandler: NSObject {
     viewController.present(actionSheet, animated: true)
   }
   
+  private func savePalette() {
+    buttons.append(UIAlertAction(title: ButtonOption.savePalette, style: .default, handler: { _ in
+      self.delegate?.savePalette()
+    }))
+  }
+  
   private func viewPaletteButton() {
     buttons.append(UIAlertAction(title: ButtonOption.viewPalette, style: .default, handler: { _ in
-      self.delegate?.viewPalette()
+      self.delegate?.viewPalette(hexColors: [])
     }))
   }
   

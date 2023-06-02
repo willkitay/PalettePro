@@ -7,18 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20EA83A2A26E62200760EB8 /* PalettePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */; };
+		D20EA83C2A27B55900760EB8 /* SavedPalettesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */; };
+		D20EA8402A283A6800760EB8 /* SavedColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */; };
+		D20EA8422A2845D600760EB8 /* ColorPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */; };
 		D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */; };
 		D242DF9F2A1AE5C200E27350 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DF9E2A1AE5C200E27350 /* RGB.swift */; };
 		D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */; };
 		D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */; };
 		D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA62A1AF97900E27350 /* UIView+Ext.swift */; };
-		D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */; };
+		D242DFA92A1B23B100E27350 /* LockButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA82A1B23B100E27350 /* LockButton.swift */; };
 		D242DFAC2A1B311400E27350 /* Functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAB2A1B311400E27350 /* Functions.swift */; };
 		D242DFB02A1C49F000E27350 /* ColorStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFAF2A1C49F000E27350 /* ColorStack.swift */; };
 		D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB12A1C4C8500E27350 /* StackButton.swift */; };
-		D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */; };
+		D242DFB82A1D3E7A00E27350 /* ColorPickerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB72A1D3E7A00E27350 /* ColorPickerVC.swift */; };
 		D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */; };
-		D25A0DBF2A1E927B00B71EF6 /* OptionsHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A0DBE2A1E927B00B71EF6 /* OptionsHandler.swift */; };
+		D25A0DBF2A1E927B00B71EF6 /* OptionsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D25A0DBE2A1E927B00B71EF6 /* OptionsManager.swift */; };
 		D2A115F22A1EFE8A00BD85B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A115F12A1EFE8A00BD85B5 /* Constants.swift */; };
 		D2A115F52A1FE29200BD85B5 /* PaletteExporter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A115F42A1FE29200BD85B5 /* PaletteExporter.swift */; };
 		D2A115F72A1FF58E00BD85B5 /* PaletteDetailsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A115F62A1FF58E00BD85B5 /* PaletteDetailsVC.swift */; };
@@ -32,7 +36,7 @@
 		D2A1160B2A22827F00BD85B5 /* ContrastRatio.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A1160A2A22827F00BD85B5 /* ContrastRatio.swift */; };
 		D2A1160D2A22AE7F00BD85B5 /* ColorCombo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A1160C2A22AE7F00BD85B5 /* ColorCombo.swift */; };
 		D2A1160F2A22B67700BD85B5 /* ColorCombos.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A1160E2A22B67700BD85B5 /* ColorCombos.swift */; };
-		D2A116112A22E6BA00BD85B5 /* CopyAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116102A22E6BA00BD85B5 /* CopyAlert.swift */; };
+		D2A116112A22E6BA00BD85B5 /* CopyAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116102A22E6BA00BD85B5 /* CopyAlertVC.swift */; };
 		D2A116152A22E71200BD85B5 /* AlertContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116142A22E71200BD85B5 /* AlertContainerView.swift */; };
 		D2A116172A22E89F00BD85B5 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2A116162A22E89F00BD85B5 /* UIViewController+Ext.swift */; };
 		D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB52A0A1F9600B958D2 /* AppDelegate.swift */; };
@@ -40,23 +44,33 @@
 		D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */; };
 		D2B53BBF2A0A1F9700B958D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */; };
 		D2B53BC22A0A1F9700B958D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BC02A0A1F9700B958D2 /* LaunchScreen.storyboard */; };
-		D2CBD94B2A1AB8AD00D42AA1 /* SystemVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */; };
+		D2CBD94B2A1AB8AD00D42AA1 /* SystemColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */; };
 		D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */; };
+		D2FF82AD2A24222F00978A62 /* SystemFontsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */; };
+		D2FF82B12A244E2200978A62 /* SavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B02A244E2200978A62 /* SavedVC.swift */; };
+		D2FF82B32A244E3000978A62 /* AIVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B22A244E3000978A62 /* AIVC.swift */; };
+		D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */; };
+		D2FF82BA2A25A4E400978A62 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B92A25A4E400978A62 /* SectionLabel.swift */; };
+		D2FF82BC2A25A70800978A62 /* SeeMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettePersistenceManager.swift; sourceTree = "<group>"; };
+		D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPalettesVC.swift; sourceTree = "<group>"; };
+		D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorsVC.swift; sourceTree = "<group>"; };
+		D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPersistenceManager.swift; sourceTree = "<group>"; };
 		D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateButton.swift; sourceTree = "<group>"; };
 		D242DF9E2A1AE5C200E27350 /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowVC.swift; sourceTree = "<group>"; };
 		D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowLabel.swift; sourceTree = "<group>"; };
 		D242DFA62A1AF97900E27350 /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
-		D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowLockButton.swift; sourceTree = "<group>"; };
+		D242DFA82A1B23B100E27350 /* LockButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockButton.swift; sourceTree = "<group>"; };
 		D242DFAB2A1B311400E27350 /* Functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Functions.swift; sourceTree = "<group>"; };
 		D242DFAF2A1C49F000E27350 /* ColorStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorStack.swift; sourceTree = "<group>"; };
 		D242DFB12A1C4C8500E27350 /* StackButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StackButton.swift; sourceTree = "<group>"; };
-		D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorDetailVC.swift; sourceTree = "<group>"; };
+		D242DFB72A1D3E7A00E27350 /* ColorPickerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPickerVC.swift; sourceTree = "<group>"; };
 		D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DotIndicator.swift; sourceTree = "<group>"; };
-		D25A0DBE2A1E927B00B71EF6 /* OptionsHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsHandler.swift; sourceTree = "<group>"; };
+		D25A0DBE2A1E927B00B71EF6 /* OptionsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionsManager.swift; sourceTree = "<group>"; };
 		D2A115F12A1EFE8A00BD85B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D2A115F42A1FE29200BD85B5 /* PaletteExporter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteExporter.swift; sourceTree = "<group>"; };
 		D2A115F62A1FF58E00BD85B5 /* PaletteDetailsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteDetailsVC.swift; sourceTree = "<group>"; };
@@ -70,7 +84,7 @@
 		D2A1160A2A22827F00BD85B5 /* ContrastRatio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContrastRatio.swift; sourceTree = "<group>"; };
 		D2A1160C2A22AE7F00BD85B5 /* ColorCombo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCombo.swift; sourceTree = "<group>"; };
 		D2A1160E2A22B67700BD85B5 /* ColorCombos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorCombos.swift; sourceTree = "<group>"; };
-		D2A116102A22E6BA00BD85B5 /* CopyAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyAlert.swift; sourceTree = "<group>"; };
+		D2A116102A22E6BA00BD85B5 /* CopyAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CopyAlertVC.swift; sourceTree = "<group>"; };
 		D2A116142A22E71200BD85B5 /* AlertContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertContainerView.swift; sourceTree = "<group>"; };
 		D2A116162A22E89F00BD85B5 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		D2B53BB22A0A1F9600B958D2 /* PalettePro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PalettePro.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,8 +94,14 @@
 		D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D2B53BC12A0A1F9700B958D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2B53BC32A0A1F9700B958D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemVC.swift; sourceTree = "<group>"; };
+		D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColorsVC.swift; sourceTree = "<group>"; };
 		D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTabBarControllerViewController.swift; sourceTree = "<group>"; };
+		D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFontsVC.swift; sourceTree = "<group>"; };
+		D2FF82B02A244E2200978A62 /* SavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVC.swift; sourceTree = "<group>"; };
+		D2FF82B22A244E3000978A62 /* AIVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIVC.swift; sourceTree = "<group>"; };
+		D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorPalette.swift; sourceTree = "<group>"; };
+		D2FF82B92A25A4E400978A62 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
+		D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,28 +115,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D242DF982A1AC29E00E27350 /* Generate */ = {
+		D20EA8382A26E60D00760EB8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
-				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
-				D25A0DBE2A1E927B00B71EF6 /* OptionsHandler.swift */,
-				D242DFB72A1D3E7A00E27350 /* ColorDetailVC.swift */,
-				D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */,
-				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
-				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
-				D242DF9D2A1ADD0100E27350 /* GenerateViews */,
+				D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */,
+				D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */,
+				D25A0DBE2A1E927B00B71EF6 /* OptionsManager.swift */,
 			);
-			path = Generate;
-			sourceTree = "<group>";
-		};
-		D242DF9D2A1ADD0100E27350 /* GenerateViews */ = {
-			isa = PBXGroup;
-			children = (
-				D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */,
-				D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */,
-				D242DFA82A1B23B100E27350 /* ColorRowLockButton.swift */,
-			);
-			path = GenerateViews;
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		D242DFAA2A1B310100E27350 /* Utilities */ = {
@@ -124,6 +130,7 @@
 			children = (
 				D242DFAB2A1B311400E27350 /* Functions.swift */,
 				D242DFAF2A1C49F000E27350 /* ColorStack.swift */,
+				D2A115F42A1FE29200BD85B5 /* PaletteExporter.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -131,9 +138,12 @@
 		D2A115F32A1FE28100BD85B5 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2A115F42A1FE29200BD85B5 /* PaletteExporter.swift */,
+				D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */,
 				D2A115F62A1FF58E00BD85B5 /* PaletteDetailsVC.swift */,
-				D2A116102A22E6BA00BD85B5 /* CopyAlert.swift */,
+				D2A116102A22E6BA00BD85B5 /* CopyAlertVC.swift */,
+				D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */,
+				D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */,
+				D242DFB72A1D3E7A00E27350 /* ColorPickerVC.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -143,8 +153,9 @@
 			children = (
 				D2A116142A22E71200BD85B5 /* AlertContainerView.swift */,
 				D2A115F92A20201900BD85B5 /* PaletteTabBar.swift */,
-				D2A115FB2A20604400BD85B5 /* ColorCode.swift */,
 				D2A1160C2A22AE7F00BD85B5 /* ColorCombo.swift */,
+				D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */,
+				D242DFB92A1DD9DF00E27350 /* DotIndicator.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -183,6 +194,9 @@
 		D2B53BB42A0A1F9600B958D2 /* PalettePro */ = {
 			isa = PBXGroup;
 			children = (
+				D20EA8382A26E60D00760EB8 /* Managers */,
+				D2FF82B82A25A42100978A62 /* Buttons */,
+				D2FF82B72A25A41B00978A62 /* Labels */,
 				D2A115F32A1FE28100BD85B5 /* ViewControllers */,
 				D2A115F82A201FFC00BD85B5 /* Views */,
 				D242DFAA2A1B310100E27350 /* Utilities */,
@@ -201,8 +215,11 @@
 		D2CBD9482A1AB71F00D42AA1 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				D242DF982A1AC29E00E27350 /* Generate */,
-				D2FF82AB2A241A6500978A62 /* System */,
+				D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */,
+				D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */,
+				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
+				D2FF82B02A244E2200978A62 /* SavedVC.swift */,
+				D2FF82B22A244E3000978A62 /* AIVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -220,8 +237,8 @@
 			isa = PBXGroup;
 			children = (
 				D242DFA62A1AF97900E27350 /* UIView+Ext.swift */,
-				D2A115FD2A2280A900BD85B5 /* UIColor+Ext */,
 				D2A116162A22E89F00BD85B5 /* UIViewController+Ext.swift */,
+				D2A115FD2A2280A900BD85B5 /* UIColor+Ext */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -242,12 +259,25 @@
 			path = TabBarControllers;
 			sourceTree = "<group>";
 		};
-		D2FF82AB2A241A6500978A62 /* System */ = {
+		D2FF82B72A25A41B00978A62 /* Labels */ = {
 			isa = PBXGroup;
 			children = (
-				D2CBD94A2A1AB8AD00D42AA1 /* SystemVC.swift */,
+				D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */,
+				D2FF82B92A25A4E400978A62 /* SectionLabel.swift */,
 			);
-			path = System;
+			path = Labels;
+			sourceTree = "<group>";
+		};
+		D2FF82B82A25A42100978A62 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */,
+				D2A115FB2A20604400BD85B5 /* ColorCode.swift */,
+				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
+				D242DFA82A1B23B100E27350 /* LockButton.swift */,
+				D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -323,32 +353,42 @@
 				D2A115FC2A20604400BD85B5 /* ColorCode.swift in Sources */,
 				D2A1160D2A22AE7F00BD85B5 /* ColorCombo.swift in Sources */,
 				D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */,
-				D2A116112A22E6BA00BD85B5 /* CopyAlert.swift in Sources */,
+				D2A116112A22E6BA00BD85B5 /* CopyAlertVC.swift in Sources */,
+				D2FF82B32A244E3000978A62 /* AIVC.swift in Sources */,
 				D2A116092A2281EE00BD85B5 /* ToHex.swift in Sources */,
 				D2A116012A2280F100BD85B5 /* HSB.swift in Sources */,
 				D2A115F72A1FF58E00BD85B5 /* PaletteDetailsVC.swift in Sources */,
 				D2A116072A2281C600BD85B5 /* FromHex.swift in Sources */,
+				D2FF82BC2A25A70800978A62 /* SeeMoreButton.swift in Sources */,
 				D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */,
+				D20EA83A2A26E62200760EB8 /* PalettePersistenceManager.swift in Sources */,
+				D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */,
 				D2A1160F2A22B67700BD85B5 /* ColorCombos.swift in Sources */,
 				D242DFB02A1C49F000E27350 /* ColorStack.swift in Sources */,
+				D2FF82AD2A24222F00978A62 /* SystemFontsVC.swift in Sources */,
+				D20EA8402A283A6800760EB8 /* SavedColorsVC.swift in Sources */,
 				D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */,
 				D2A116032A22816800BD85B5 /* LighterOrDarker.swift in Sources */,
-				D242DFA92A1B23B100E27350 /* ColorRowLockButton.swift in Sources */,
+				D242DFA92A1B23B100E27350 /* LockButton.swift in Sources */,
 				D2A116172A22E89F00BD85B5 /* UIViewController+Ext.swift in Sources */,
 				D2A116052A22819C00BD85B5 /* GenerateRandomColor.swift in Sources */,
 				D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */,
+				D20EA8422A2845D600760EB8 /* ColorPersistenceManager.swift in Sources */,
 				D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */,
 				D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */,
 				D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */,
-				D242DFB82A1D3E7A00E27350 /* ColorDetailVC.swift in Sources */,
+				D242DFB82A1D3E7A00E27350 /* ColorPickerVC.swift in Sources */,
+				D2FF82BA2A25A4E400978A62 /* SectionLabel.swift in Sources */,
 				D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */,
-				D25A0DBF2A1E927B00B71EF6 /* OptionsHandler.swift in Sources */,
+				D25A0DBF2A1E927B00B71EF6 /* OptionsManager.swift in Sources */,
 				D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */,
+				D2FF82B12A244E2200978A62 /* SavedVC.swift in Sources */,
 				D2A116152A22E71200BD85B5 /* AlertContainerView.swift in Sources */,
 				D242DF9F2A1AE5C200E27350 /* RGB.swift in Sources */,
 				D2A1160B2A22827F00BD85B5 /* ContrastRatio.swift in Sources */,
 				D2B53BB82A0A1F9600B958D2 /* SceneDelegate.swift in Sources */,
-				D2CBD94B2A1AB8AD00D42AA1 /* SystemVC.swift in Sources */,
+				D2CBD94B2A1AB8AD00D42AA1 /* SystemColorsVC.swift in Sources */,
+				D20EA83C2A27B55900760EB8 /* SavedPalettesVC.swift in Sources */,
 				D242DFAC2A1B311400E27350 /* Functions.swift in Sources */,
 				D2A115F22A1EFE8A00BD85B5 /* Constants.swift in Sources */,
 				D2A115FA2A20201900BD85B5 /* PaletteTabBar.swift in Sources */,

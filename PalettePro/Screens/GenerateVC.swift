@@ -7,8 +7,8 @@
 
 import UIKit
 
-class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegate {
-  
+class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
+
   var stack = ColorStack()
   var colorRows: [ColorRowVC] = []
   
@@ -17,7 +17,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
   let leftStackButton = StackButton(facing: .left)
   let rightStackButton = StackButton(facing: .right)
   let generateButton = GenerateButton()
-  let optionsHandler = OptionsHandler()
+  let optionsHandler = OptionsManager()
 
   var currentNumberOfRows: Int = Constants.defaultNumberOfRows
   
@@ -25,6 +25,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
     navigationController?.setNavigationBarHidden(true, animated: true)
+    
     optionsHandler.delegate = self
     configureRows()
     configureStackView()
@@ -33,15 +34,22 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     configureStackButtons()
     configureOptionsButton()
     updateArrowButtonsAppearance()
-    updateFirstRowLabelConstraint()
   }
   
   private func configureRows() {
-    colorRows = [ColorRowVC(isFirstRowInArray: true), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
+    colorRows = [ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
+    for colorRow in colorRows {
+      addChild(colorRow)
+      colorRow.delegate = self
+    }
   }
   
   private func configureGenerateButton() {
     generateButton.addTarget(self, action: #selector(generateButtonTapped), for: .touchUpInside)
+  }
+  
+  func triggerColorShadeChange(previousColor: UIColor?, newColor: UIColor?) {
+    didSelectColor(previousColor: previousColor, newColor: newColor)
   }
   
   func didSelectColor(previousColor: UIColor?, newColor: UIColor?) {
@@ -50,8 +58,6 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     
     updateStack(to: newColor, from: previousColor)
     updateColorRow(to: newColor, from: previousColor)
-    
-    updateColorRowTapGesture()
   }
   
   private func updateStack(to newColor: UIColor, from previousColor: UIColor ) {
@@ -63,6 +69,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
   
   private func updateColorRow(to newColor: UIColor, from previousColor: UIColor ) {
     for row in colorRows {
+      
       if row.hexLabel.text == previousColor.toHex() {
         row.updateStack(with: newColor.toHex(), isLocked: row.lockButton.isLocked)
         break
@@ -81,21 +88,6 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     stack.push(colorRows.map { ($0.hexLabel.text ?? "", $0.lockButton.isLocked) })
     stack.moveToTop()
     updateArrowButtonsAppearance()
-    updateColorRowTapGesture()
-  }
-  
-  private func updateColorRowTapGesture() {
-    for row in colorRows {
-      let tapGesture = ColorRowTapGestureRecognizer(target: self, action: #selector(colorRowTapped))
-      tapGesture.hex = row.hexLabel.text
-      row.view.addGestureRecognizer(tapGesture)
-    }
-  }
-  
-  @objc func colorRowTapped(_ sender: ColorRowTapGestureRecognizer) {
-    let colorDetailVC = ColorDetailVC(hex: sender.hex)
-    colorDetailVC.delegate = self
-    present(colorDetailVC, animated: true)
   }
   
   @objc func triggerLeftArrowButton() {
@@ -105,7 +97,6 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     stack.decrement()
     updateStackViewColors()
     updateArrowButtonsAppearance()
-    updateColorRowTapGesture()
   }
   
   @objc func triggerRightArrowButton() {
@@ -115,7 +106,6 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     stack.increment()
     updateStackViewColors()
     updateArrowButtonsAppearance()
-    updateColorRowTapGesture()
   }
   
   private func updateLockStates() {
@@ -127,16 +117,14 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
   private func updateStackViewColors() {
     colorRows.removeAll()
     
-    for (colorIndex, color) in stack.currentColors.enumerated() {
-      let colorRow = ColorRowVC(isFirstRowInArray: colorIndex == 0)
+    for color in stack.currentColors {
+      let colorRow = ColorRowVC()
       colorRow.updateStack(with: color.0, isLocked: color.1)
       colorRows.append(colorRow)
     }
     
     stackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
     colorRows.forEach { stackView.addArrangedSubview($0.view) }
-    
-    updateColorRowTapGesture()
   }
   
   private func updateArrowButtonsAppearance() {
@@ -148,9 +136,8 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     optionsHandler.showOptions(from: self, sourceView: optionsButton)
   }
   
-  func viewPalette() {
+  func viewPalette(hexColors: [String]) {
     let paletteDetailsVC = PaletteDetailsVC(colors: colorRows.map { $0.hexLabel.text ?? "" })
-    paletteDetailsVC.navigationItem.title = "Palette Details"
     paletteDetailsVC.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .close, target: self, action: #selector(closeViewPalette))
     
     let navigationController = UINavigationController(rootViewController: paletteDetailsVC)
@@ -161,7 +148,11 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
   
   @objc func closeViewPalette() { dismiss(animated: true) }
   
-  func savePalette() { print("savePalette") }
+  func savePalette() {
+    let palette = Palette(colors: colorRows.map { $0.hexLabel.text ?? "" })
+        
+    PalettePersistenceManager.updateWith(favorite: palette, actionType: .add) { _ in }
+  }
   
   func exportPalette() {
     let colorsToExport = colorRows.map { $0.hexLabel.text ?? "" }
@@ -173,21 +164,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     guard currentNumberOfRows < Constants.maxNumberOfRows else { return }
     
     let newRow = createNewColorRowVC()
-    
-    if stack.currentIndex == 0 { newRow.isTopColorRow = true }
-
-    UIView.animate(withDuration: 0.3) {
-      newRow.view.isHidden = false
-      self.updateFirstRowLabelConstraint()
-    }
-  }
-  
-  private func updateFirstRowLabelConstraint() {
-    if let row = self.colorRows.first {
-      NSLayoutConstraint.activate([
-        row.hexLabel.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor)
-      ])
-    }
+    UIView.animate(withDuration: 0.3) { newRow.view.isHidden = false }
   }
   
   func canRemoveColor() -> Bool {
@@ -201,8 +178,8 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     self.stack.addColor([(newRow.view.backgroundColor?.toHex() ?? "", false)])
     self.colorRows.append(newRow)
     self.stackView.addArrangedSubview(newRow.view)
-    updateColorRowTapGesture()
     currentNumberOfRows += 1
+    addChild(newRow)
     return newRow
   }
   
@@ -215,6 +192,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
         colorRows.remove(at: index)
         stack.removeColor(at: index)
         currentNumberOfRows -= 1
+        row.removeFromParent()
         return
       }
     }
@@ -228,7 +206,6 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     
     for row in colorRows { stackView.addArrangedSubview(row.view) }
     
-    updateColorRowTapGesture()
     stack.push(colorRows.map { ($0.hexLabel.text ?? "", $0.lockButton.isLocked) })
   }
   
@@ -237,7 +214,7 @@ class GenerateVC: UIViewController, ColorDetailVCDelegate, OptionsHandlerDelegat
     
     let tabviewHeight: CGFloat = 50
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.topAnchor),
+      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       stackView.bottomAnchor.constraint(equalTo: generateButton.topAnchor),

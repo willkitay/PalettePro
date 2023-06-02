@@ -13,35 +13,41 @@ class PTabBarController: UITabBarController {
     super.viewDidLoad()
     UITabBar.appearance().tintColor = .label
     
-    viewControllers = [createGenerateVC(), createSystem(), createFavoritesVC(), createAIVC()]
+    viewControllers = [createGenerateVC(),
+                       createSavedVC(),
+                       createSystemColorsVC(),
+                       createSystemFontsVC()]
     selectedViewController = viewControllers?[0]
-  }
-  
-  func createAIVC() -> UINavigationController {
-    let aiVC = SystemVC()
-    aiVC.tabBarItem = UITabBarItem(title: "AI", image: UIImage(systemName: "waveform"), tag: 0)
-    
-    return UINavigationController(rootViewController: aiVC)
   }
   
   func createGenerateVC() -> UINavigationController {
     let generateVC = GenerateVC()
-    generateVC.tabBarItem = UITabBarItem(title: "Create", image: UIImage(systemName: "swatchpalette"), tag: 2)
-    
+    generateVC.tabBarItem = UITabBarItem(title: "Create", image: Symbols.swatchpalette, tag: 2)
     return UINavigationController(rootViewController: generateVC)
   }
   
-  func createSystem() -> UINavigationController {
-    let systemVC = SystemVC()
-    systemVC.tabBarItem = UITabBarItem(title: "System", image: UIImage(systemName: "iphone"), tag: 1)
-    
+  func createSystemColorsVC() -> UINavigationController {
+    let systemVC = SystemColorsVC()
+    systemVC.tabBarItem = UITabBarItem(title: "Colors", image: Symbols.eyedropper, tag: 1)
     return UINavigationController(rootViewController: systemVC)
   }
   
-  func createFavoritesVC() -> UINavigationController {
-    let favoritesVC = SystemVC()
-    favoritesVC.tabBarItem = UITabBarItem(title: "Saved", image: UIImage(systemName: "star"), tag: 3)
-    
-    return UINavigationController(rootViewController: favoritesVC)
+  func createSystemFontsVC() -> UINavigationController {
+    let systemVC = SystemFontsVC()
+    systemVC.tabBarItem = UITabBarItem(title: "Fonts", image: Symbols.textformatSize, tag: 1)
+    return UINavigationController(rootViewController: systemVC)
   }
+  
+  func createSavedVC() -> UINavigationController {
+    let savedVC = SavedVC()
+    savedVC.tabBarItem = UITabBarItem(title: "Favorites", image: Symbols.heart, tag: 3)
+    return UINavigationController(rootViewController: savedVC)
+  }
+  
+  func createAIVC() -> UINavigationController {
+    let aiVC = AIVC()
+    aiVC.tabBarItem = UITabBarItem(title: "AI", image: Symbols.waveform, tag: 0)
+    return UINavigationController(rootViewController: aiVC)
+  }
+  
 }
