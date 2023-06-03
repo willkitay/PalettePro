@@ -18,6 +18,7 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
   let seeMorePalettes = SeeMoreButton()
   let seeMoreColors = SeeMoreButton()
   let colorsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  let menuButton = UIButton()
   
   private let padding: CGFloat = 10
   
@@ -75,6 +76,46 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
         palette.updateColors(colors)
         palette.delegate = self
         self.paletteStackView.addArrangedSubview(palette)
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPaletteTap))
+        palette.addGestureRecognizer(longTapGesture)
+      }
+    }
+    if savedPalettes.count <= 4 {
+      seeMorePalettes.isHidden = true
+    } else {
+      seeMorePalettes.isHidden = false
+    }
+  }
+  
+  @objc private func longPaletteTap(_ sender: UILongPressGestureRecognizer) {
+    guard let paletteView = sender.view as? SavedColorPalette else { return }
+    
+    let alertController = UIAlertController(title: "Delete Palette", message: "Are you sure you want to delete this palette?", preferredStyle: .actionSheet)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
+      let colors = paletteView.colors
+      self.delete(colors: colors)
+    }
+    
+    alertController.addAction(cancelAction)
+    alertController.addAction(deleteAction)
+    present(alertController, animated: true)
+  }
+  
+  private func delete(colors: [UIColor]) {
+    let colors = colors.map { $0.toHex() }
+    let savedPalette = Palette(colors: colors)
+    PalettePersistenceManager.updateWith(favorite: savedPalette, actionType: .remove) { error in
+      guard error == nil else { return }
+      DispatchQueue.main.async { self.removePaletteFromStackView(with: colors) }
+    }
+  }
+  
+  private func removePaletteFromStackView(with colors: [String]) {
+    for subview in self.paletteStackView.subviews {
+      if let palette = subview as? SavedColorPalette, palette.colors.map({ $0.toHex()}) == colors {
+        UIView.animate(withDuration: 0.3) { palette.isHidden = true }
+        return
       }
     }
   }
@@ -124,11 +165,11 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
   
   func configurePaletteStackView() {
     view.addSubview(paletteStackView)
-    
     paletteStackView.axis = .vertical
     paletteStackView.distribution = .fill
     paletteStackView.spacing = padding
     paletteStackView.translatesAutoresizingMaskIntoConstraints = false
+    paletteStackView.clipsToBounds = true
     
     NSLayoutConstraint.activate([
       paletteStackView.topAnchor.constraint(equalTo: palettesLabel.bottomAnchor, constant: padding),
@@ -140,7 +181,6 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
   func configureSeeMorePalettes() {
     view.addSubview(seeMorePalettes)
     seeMorePalettes.addTarget(self, action: #selector(presentSeeMorePalettesVC), for: .touchUpInside)
-    
     
     NSLayoutConstraint.activate([
       seeMorePalettes.topAnchor.constraint(equalTo: paletteStackView.bottomAnchor, constant: padding),
@@ -182,13 +222,11 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
       colorsCollectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
       colorsCollectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
       colorsCollectionView.heightAnchor.constraint(equalToConstant: 210)
-      
     ])
   }
   
   func configureSeeMoreColors() {
     view.addSubview(seeMoreColors)
-    
     seeMoreColors.addTarget(self, action: #selector(presentSeeMoreColorsVC), for: .touchUpInside)
     
     NSLayoutConstraint.activate([
@@ -202,7 +240,8 @@ class SavedVC: UIViewController, SavedColorPaletteDelegate, UICollectionViewData
 extension SavedVC {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return min(colors.count, 15)
+    seeMoreColors.isHidden = colors.count <= 15
+    return colors.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -212,7 +251,41 @@ extension SavedVC {
     
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapColor))
     cell.addGestureRecognizer(tapGesture)
+    
+    let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longColorTap))
+    cell.addGestureRecognizer(longTapGesture)
     return cell
+  }
+  
+  @objc func longColorTap(_ sender: UILongPressGestureRecognizer) {
+    guard let cell = sender.view as? UICollectionViewCell,
+          let indexPath = colorsCollectionView.indexPath(for: cell)
+    else { return }
+    
+    let alertController = UIAlertController(title: "Delete Color", message: "Are you sure you want to delete this color?", preferredStyle: .actionSheet)
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { [weak self] _ in
+      guard let self = self else { return }
+      deleteColor(at: indexPath)
+    }
+    
+    alertController.addAction(cancelAction)
+    alertController.addAction(deleteAction)
+    present(alertController, animated: true)
+  }
+  
+  private func deleteColor(at indexPath: IndexPath) {
+    let colorToRemove = colors[indexPath.item]
+    ColorPersistenceManager.updateWith(favorite: colorToRemove, actionType: .remove) { error in
+      guard error == nil else { return }
+      guard let index = self.colors.firstIndex(where: { $0.hex == colorToRemove.hex }) else { return }
+      
+      DispatchQueue.main.async {
+        self.colors.remove(at: index)
+        self.colorsCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        self.colorsCollectionView.reloadData()
+      }
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -221,3 +294,4 @@ extension SavedVC {
     return CGSize(width: itemWidth, height: itemWidth)
   }
 }
+

@@ -11,7 +11,7 @@ class PTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    UITabBar.appearance().tintColor = .label
+    UITabBar.appearance().tintColor = .systemGreen
     
     viewControllers = [createGenerateVC(),
                        createSavedVC(),

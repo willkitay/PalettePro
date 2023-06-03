@@ -16,7 +16,7 @@ class SavedColorPalette: UIStackView {
   weak var delegate: SavedColorPaletteDelegate?
   
   private var colorButtons: [UIButton] = []
-  private var colors: [UIColor] = []
+  private(set) var colors: [UIColor] = []
   
   override init(frame: CGRect) {
     super.init(frame: frame)
