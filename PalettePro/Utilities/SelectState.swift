@@ -10,8 +10,8 @@ enum SelectState: String {
   
   var string: String {
     switch self {
-    case .select: return "Select"
-    case .cancel: return "Cancel"
+    case .select: return "Select    "
+    case .cancel: return "Cancel    "
     }
   }
 }

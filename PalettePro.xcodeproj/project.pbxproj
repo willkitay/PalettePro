@@ -12,6 +12,8 @@
 		D20EA8402A283A6800760EB8 /* SavedColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */; };
 		D20EA8422A2845D600760EB8 /* ColorPersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */; };
 		D20EA8482A2A899000760EB8 /* SelectState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA8472A2A899000760EB8 /* SelectState.swift */; };
+		D20EA84C2A2D102000760EB8 /* RootVCManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA84B2A2D102000760EB8 /* RootVCManager.swift */; };
+		D20EA84E2A2D2FB700760EB8 /* UIImage+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA84D2A2D2FB700760EB8 /* UIImage+Ext.swift */; };
 		D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */; };
 		D242DF9F2A1AE5C200E27350 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DF9E2A1AE5C200E27350 /* RGB.swift */; };
 		D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */; };
@@ -61,6 +63,8 @@
 		D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorsVC.swift; sourceTree = "<group>"; };
 		D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorPersistenceManager.swift; sourceTree = "<group>"; };
 		D20EA8472A2A899000760EB8 /* SelectState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectState.swift; sourceTree = "<group>"; };
+		D20EA84B2A2D102000760EB8 /* RootVCManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootVCManager.swift; sourceTree = "<group>"; };
+		D20EA84D2A2D2FB700760EB8 /* UIImage+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Ext.swift"; sourceTree = "<group>"; };
 		D242DF9B2A1ADCFB00E27350 /* GenerateButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateButton.swift; sourceTree = "<group>"; };
 		D242DF9E2A1AE5C200E27350 /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
 		D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorRowVC.swift; sourceTree = "<group>"; };
@@ -121,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */,
+				D20EA84B2A2D102000760EB8 /* RootVCManager.swift */,
 				D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */,
 				D25A0DBE2A1E927B00B71EF6 /* OptionsManager.swift */,
 			);
@@ -242,6 +247,7 @@
 				D242DFA62A1AF97900E27350 /* UIView+Ext.swift */,
 				D2A116162A22E89F00BD85B5 /* UIViewController+Ext.swift */,
 				D2A115FD2A2280A900BD85B5 /* UIColor+Ext */,
+				D20EA84D2A2D2FB700760EB8 /* UIImage+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -368,8 +374,10 @@
 				D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */,
 				D2A1160F2A22B67700BD85B5 /* ColorCombos.swift in Sources */,
 				D242DFB02A1C49F000E27350 /* ColorStack.swift in Sources */,
+				D20EA84E2A2D2FB700760EB8 /* UIImage+Ext.swift in Sources */,
 				D2FF82AD2A24222F00978A62 /* SystemFontsVC.swift in Sources */,
 				D20EA8402A283A6800760EB8 /* SavedColorsVC.swift in Sources */,
+				D20EA84C2A2D102000760EB8 /* RootVCManager.swift in Sources */,
 				D242DFA32A1AF2C900E27350 /* ColorRowVC.swift in Sources */,
 				D2A116032A22816800BD85B5 /* LighterOrDarker.swift in Sources */,
 				D242DFA92A1B23B100E27350 /* LockButton.swift in Sources */,

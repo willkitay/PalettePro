@@ -10,9 +10,7 @@ import UIKit
 class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
   private let colorsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-  private let bottomBar = UIView()
   private let containerView = UIView()
-  private let trashButton = UIButton()
   
   private var colors: [Color] = []
   private var selectedColors: [Color] = []
@@ -25,7 +23,12 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     configureNavigationBar()
     configureContainerView()
     configureColorsCollectionView()
-    configureBottomBar()
+  }
+  
+  override func viewDidDisappear(_ animated: Bool) {
+    if selectState == .cancel { toggleSelectState() }
+    navigationItem.leftBarButtonItem?.isHidden = true
+    deselectAllCells()
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -35,19 +38,19 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   @objc private func toggleSelectState() {
     selectState = selectState == .select ? .cancel : .select
     navigationItem.rightBarButtonItem?.title = selectState.string
-    toggleTabBar()
+    navigationItem.leftBarButtonItem?.isHidden.toggle()
+    disableTrashButton()
     deselectAllCells()
-  }
-  
-  private func toggleTabBar() {
-    tabBarController?.tabBar.isHidden.toggle()
-    bottomBar.isHidden.toggle()
   }
   
   private func configureNavigationBar() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: selectState.string, style: .plain, target: self, action: #selector(toggleSelectState))
-    title = "Colors"
-    navigationController?.navigationBar.tintColor = .systemGreen
+    navigationItem.rightBarButtonItem?.tintColor = .systemGreen
+    
+    navigationItem.leftBarButtonItem = UIBarButtonItem(image: Symbols.trash, style: .plain, target: self, action: #selector(deleteSelectedColors))
+    navigationItem.leftBarButtonItem?.isHidden = true
+    disableTrashButton()
+    title = "Favorite Colors"
   }
   
   @objc private func deleteSelectedColors() {
@@ -56,6 +59,12 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     removeSelectedColorsFromColors()
     deselectAllCells()
     removeSelectedColorsFromCollectionView()
+    disableTrashButton()
+    toggleSelectState()
+  }
+  
+  private func disableTrashButton() {
+    navigationItem.leftBarButtonItem?.tintColor = .systemGray
   }
   
   private func removeSelectedColorsFromColors() {
@@ -82,7 +91,6 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
       cell?.isSelected = false
       removeBadgeFromCell(cell)
     }
-    trashButton.tintColor = .systemGray
   }
   
   private func removeBadgeFromCell(_ cell: UICollectionViewCell?) {
@@ -133,7 +141,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     colorsCollectionView.deselectItem(at: indexPath, animated: true)
     cell.isSelected = false
     removeBadgeFromCell(cell)
-    if selectedColors.isEmpty { trashButton.tintColor = .systemGray }
+    if selectedColors.isEmpty { disableTrashButton() }
   }
   
   private func select(_ cell: UICollectionViewCell, at indexPath: IndexPath, for sender: UIGestureRecognizer) {
@@ -141,7 +149,8 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     colorsCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: .centeredVertically)
     cell.isSelected = true
     configureSelectedUICollectionViewCell(with: sender, for: cell)
-    trashButton.tintColor = .systemGreen
+    
+    navigationItem.leftBarButtonItem?.tintColor = .systemRed
   }
   
   private func configureSelectedUICollectionViewCell(with sender: UIGestureRecognizer, for cell: UICollectionViewCell?) {
@@ -173,13 +182,12 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   private func openPaletteDetailsVC(for sender: UIGestureRecognizer) {
     guard let color = sender.view?.backgroundColor?.toHex() else { return }
     let paletteDetailsVC = PaletteDetailsVC(colors: [color])
-    present(paletteDetailsVC, animated: true)
+    RootVCManager.shared?.present(paletteDetailsVC, animated: true)
   }
   
   private func configureContainerView() {
     view.addSubview(containerView)
     containerView.translatesAutoresizingMaskIntoConstraints = false
-    
     NSLayoutConstraint.activate([
       containerView.topAnchor.constraint(equalTo: view.topAnchor),
       containerView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -188,71 +196,13 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     ])
   }
   
-  private func configureBottomBar() {
-    colorsCollectionView.addSubview(bottomBar)
-    bottomBar.translatesAutoresizingMaskIntoConstraints = false
-    bottomBar.isHidden = true
- 
-    let tabBarHeight: CGFloat = tabBarController?.tabBar.frame.size.height ?? 80
-    NSLayoutConstraint.activate([
-      bottomBar.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-      bottomBar.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-      bottomBar.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-      bottomBar.heightAnchor.constraint(equalToConstant: tabBarHeight)
-    ])
-    
-    configureBottomBarBackground()
-    configureBottomBarTitle()
-    configureTrashButton()
-  }
-  
-  private func configureBottomBarTitle() {
-    let titleLabel = UILabel()
-    bottomBar.addSubview(titleLabel)
-    titleLabel.text = "Select Items"
-    titleLabel.textColor = .label
-    titleLabel.font = .preferredFont(forTextStyle: .headline)
-    titleLabel.translatesAutoresizingMaskIntoConstraints = false
-    titleLabel.textAlignment = .center
-    
-    let tabBarHeight: CGFloat = tabBarController?.tabBar.frame.size.height ?? 80
-    NSLayoutConstraint.activate([
-      titleLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
-      titleLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
-      titleLabel.heightAnchor.constraint(equalToConstant: tabBarHeight),
-      titleLabel.widthAnchor.constraint(equalToConstant: 150),
-    ])
-  }
-  
-  private func configureBottomBarBackground() {
-    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.systemThickMaterial)
-    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-    blurEffectView.frame = bottomBar.bounds
-    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    bottomBar.addSubview(blurEffectView)
-  }
-  
-  private func configureTrashButton() {
-    
-    bottomBar.addSubview(trashButton)
-    trashButton.setImage(UIImage(systemName: "trash"), for: .normal)
-    trashButton.setPreferredSymbolConfiguration(.init(textStyle: .headline), forImageIn: .normal)
-    trashButton.tintColor = .systemGray
-    trashButton.translatesAutoresizingMaskIntoConstraints = false
-    trashButton.addTarget(self, action: #selector(deleteSelectedColors), for: .touchUpInside)
-    
-    let tabBarHeight: CGFloat = tabBarController?.tabBar.frame.size.height ?? 80
-    NSLayoutConstraint.activate([
-      trashButton.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-      trashButton.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -10),
-      trashButton.widthAnchor.constraint(equalToConstant: 50),
-      trashButton.heightAnchor.constraint(equalToConstant: tabBarHeight),
-    ])
-  }
-  
   private func configureColorsCollectionView() {
     view.addSubview(colorsCollectionView)
+    let uiview = UIImageView()
+    uiview.image = Images.emptyBox?.imageWithInsets(insets: UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 30))
+    uiview.contentMode = .scaleAspectFit
     
+    colorsCollectionView.backgroundView = uiview
     colorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
     colorsCollectionView.dataSource = self
     colorsCollectionView.delegate = self
@@ -263,7 +213,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     let layout = UICollectionViewFlowLayout()
     layout.minimumInteritemSpacing = padding
     layout.minimumLineSpacing = padding
-    layout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
     layout.scrollDirection = .vertical
     colorsCollectionView.collectionViewLayout = layout
     
@@ -279,6 +229,13 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
 extension SavedColorsVC {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    UIView.animate(withDuration: 0.2) {
+      if self.colors.count > 0 {
+        self.colorsCollectionView.backgroundView?.isHidden = true
+      } else {
+        self.colorsCollectionView.backgroundView?.isHidden = false
+      }
+    }
     return colors.count
   }
   
@@ -298,3 +255,4 @@ extension SavedColorsVC {
     return CGSize(width: itemWidth, height: itemWidth)
   }
 }
+

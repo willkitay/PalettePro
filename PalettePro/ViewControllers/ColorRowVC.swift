@@ -20,6 +20,9 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
   weak var delegate: ColorRowVCDelegate?
   
   override func viewDidLoad() {
+//    print(parent)
+//    parent = RootVCManager.shared
+    
     super.viewDidLoad()
     view.addSubviews(hexLabel, lockButton, menuButton)
     

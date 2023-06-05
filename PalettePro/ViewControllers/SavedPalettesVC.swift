@@ -7,20 +7,25 @@
 
 import UIKit
 
-class SavedPalettesVC: UIViewController, SavedColorPaletteDelegate {
+class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   
-  var currentDetailPalette = PaletteDetailsVC(colors: [])
+  private var currentDetailPalette = PaletteDetailsVC(colors: [])
+
+  private let scrollView = UIScrollView()
+  private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  let backgroundImageView = UIImageView()
   
-  let scrollView = UIScrollView()
-  let stackview = UIStackView()
-  
-  let padding: CGFloat = 10
+  private let cellReuseIdentifier = "SavedColorPaletteCell"
+  private let padding: CGFloat = 10
+  private var savedPalettes: [Palette] = []
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = .systemBackground
-    title = "Palettes"
+    title = "Favorite Palettes"
     navigationController?.navigationBar.tintColor = .label
+    view.addSubview(backgroundImageView)
+    setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
     configure()
   }
   
@@ -28,65 +33,100 @@ class SavedPalettesVC: UIViewController, SavedColorPaletteDelegate {
     getSavedPalettes()
   }
   
-  func getSavedPalettes() {
+  private func configure() {
+    view.addSubview(collectionView)
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView.backgroundColor = .clear
+    
+    NSLayoutConstraint.activate([
+      collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
+      collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: padding),
+      collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -padding),
+      collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -padding)
+    ])
+    
+    collectionView.dataSource = self
+    collectionView.delegate = self
+    collectionView.register(SavedColorPaletteCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+    
+    let layout = UICollectionViewFlowLayout()
+    collectionView.collectionViewLayout = layout
+  }
+  
+  private func getSavedPalettes() {
     PalettePersistenceManager.retrieveFavorites { [weak self] result in
-      guard let self else { return }
+      guard let self = self else { return }
       switch result {
-      case .success(let favorites): updateUI(with: favorites)
+      case .success(let favorites): self.updateUI(with: favorites)
       case .failure(let error): print(error.rawValue)
       }
     }
   }
   
   private func updateUI(with savedPalettes: [Palette]) {
-    for subview in stackview.subviews { stackview.removeArrangedSubview(subview) }
+    self.savedPalettes = savedPalettes
+    
+    let hasSavedPalettes = !savedPalettes.isEmpty
+    if hasSavedPalettes {
+      backgroundImageView.removeFromSuperview()
+    } else {
+      view.addSubview(backgroundImageView)
+      setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
+    }
     
     DispatchQueue.main.async {
-      for savedPalette in savedPalettes {
-        let palette = SavedColorPalette(frame: .zero)
-        let colors = savedPalette.colors.map { UIColor(hex: $0) ?? .clear }
-        
-        palette.updateColors(colors)
-        palette.delegate = self
-        self.stackview.addArrangedSubview(palette)
-        
-        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(self.longPaletteTap))
-        palette.addGestureRecognizer(longTapGesture)
-      }
+      self.collectionView.reloadData()
     }
   }
+}
+
+extension SavedPalettesVC {
   
-  @objc private func longPaletteTap(_ sender: UILongPressGestureRecognizer) {
-    guard let paletteView = sender.view as? SavedColorPalette else { return }
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return savedPalettes.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath) as! SavedColorPaletteCell
     
-    let alertController = UIAlertController(title: "Delete Palette", message: "Are you sure you want to delete this palette?", preferredStyle: .actionSheet)
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-    let deleteAction = UIAlertAction(title: "Delete", style: .destructive) { _ in
-      let colors = paletteView.colors
-      self.delete(colors: colors)
-    }
+    let savedPalette = savedPalettes[indexPath.item]
+    let colors = savedPalette.colors.map { UIColor(hex: $0) ?? .clear }
+
+    let palette = SavedColorPalette()
+    palette.updateColors(colors)
+    palette.widthAnchor.constraint(equalToConstant: collectionView.contentSize.width - 10).isActive = true
+    cell.backgroundView = palette
+    cell.isUserInteractionEnabled = true
     
-    alertController.addAction(cancelAction)
-    alertController.addAction(deleteAction)
-    present(alertController, animated: true)
+    return cell
+  }
+
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let cellWidth = collectionView.bounds.width - padding
+    return CGSize(width: cellWidth, height: 40)
   }
   
-  private func delete(colors: [UIColor]) {
-    let colors = colors.map { $0.toHex() }
-    let savedPalette = Palette(colors: colors)
-    PalettePersistenceManager.updateWith(favorite: savedPalette, actionType: .remove) { error in
-      guard error == nil else { return }
-      DispatchQueue.main.async { self.removePaletteFromStackView(with: colors) }
-    }
+}
+
+class SavedColorPaletteCell: UICollectionViewCell {
+  let paletteView = SavedColorPalette(frame: .zero)
+  
+  private var currentDetailPalette = PaletteDetailsVC(colors: [])
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
+    contentView.addGestureRecognizer(tapGesture)
   }
   
-  private func removePaletteFromStackView(with colors: [String]) {
-    for subview in self.stackview.subviews {
-      if let palette = subview as? SavedColorPalette, palette.colors.map({ $0.toHex()}) == colors {
-        UIView.animate(withDuration: 0.3) { palette.isHidden = true }
-        return
-      }
-    }
+  required init?(coder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  @objc private func handleTap(_ sender: UITapGestureRecognizer) {
+    guard let palette = backgroundView as? SavedColorPalette else { return }
+    let colors = palette.colors.map { $0.toHex() }
+    presentPaletteDetailsVC(colors: colors)
   }
   
   func presentPaletteDetailsVC(colors: [String]) {
@@ -95,27 +135,8 @@ class SavedPalettesVC: UIViewController, SavedColorPaletteDelegate {
     currentDetailPalette.colors = colors
     currentDetailPalette.selectColor(selectedColor)
     currentDetailPalette.tabBar.setTabBarColors(colors)
-    present(currentDetailPalette, animated: true)
-  }
-  
-  private func configure() {
-    view.addSubview(scrollView)
-    scrollView.translatesAutoresizingMaskIntoConstraints = false
-    scrollView.pinToEdges(of: view)
     
-    scrollView.addSubview(stackview)
-    stackview.axis = .vertical
-    stackview.distribution = .fill
-    stackview.spacing = padding
-    stackview.translatesAutoresizingMaskIntoConstraints = false
-    
-    NSLayoutConstraint.activate([
-      stackview.topAnchor.constraint(equalTo: scrollView.contentLayoutGuide.topAnchor, constant: padding),
-      stackview.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: padding),
-      stackview.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -padding),
-      stackview.widthAnchor.constraint(equalTo: scrollView.widthAnchor, constant: padding * (-2)),
-      stackview.bottomAnchor.constraint(equalTo: scrollView.contentLayoutGuide.bottomAnchor, constant: -padding)
-    ])
+    RootVCManager.shared?.present(currentDetailPalette, animated: true)
   }
-  
+
 }

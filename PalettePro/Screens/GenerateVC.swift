@@ -115,10 +115,13 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   }
   
   private func updateStackViewColors() {
+    for row in colorRows { row.removeFromParent() }
     colorRows.removeAll()
-    
+
     for color in stack.currentColors {
       let colorRow = ColorRowVC()
+      addChild(colorRow)
+      colorRow.delegate = self
       colorRow.updateStack(with: color.0, isLocked: color.1)
       colorRows.append(colorRow)
     }
