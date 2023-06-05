@@ -26,7 +26,7 @@ class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectio
     title = "Favorite Palettes"
     navigationController?.navigationBar.tintColor = .label
     view.addSubview(backgroundImageView)
-    setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
+    setEmptyBackgroundImage(Images.savedPalettes, backgroundImageView: backgroundImageView)
     configure()
   }
   
@@ -73,7 +73,7 @@ class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectio
       backgroundImageView.removeFromSuperview()
     } else {
       view.addSubview(backgroundImageView)
-      setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
+      setEmptyBackgroundImage(Images.savedPalettes, backgroundImageView: backgroundImageView)
     }
     
     DispatchQueue.main.async {
@@ -107,7 +107,7 @@ class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectio
   
   private func showEmptyBackgroundImage() {
       view.addSubview(backgroundImageView)
-      setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
+      setEmptyBackgroundImage(Images.savedPalettes, backgroundImageView: backgroundImageView)
   }
   
   func delete(_ palette: Palette) {

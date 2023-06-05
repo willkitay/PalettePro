@@ -11,10 +11,8 @@ protocol OptionsHandlerDelegate: AnyObject {
   var currentNumberOfRows: Int { get }
   
   func addColor()
-  func removeColor()
   func viewPalette(hexColors: [String])
   func exportPalette()
-  func canRemoveColor() -> Bool
   func savePalette()
 }
 
@@ -23,7 +21,6 @@ enum ButtonOption {
   static let savePalette = String("Save Palette")
   static let exportPalette = String("Export Palette")
   static let addColor = String("Add Color")
-  static let removeColor = String("Remove Color")
 }
 
 class OptionsManager: NSObject {
@@ -42,7 +39,6 @@ class OptionsManager: NSObject {
     savePalette()
     exportPaletteButton()
     addColorButton()
-    removeColorButton()
     
     for button in buttons { actionSheet.addAction(button) }
     
@@ -68,14 +64,6 @@ class OptionsManager: NSObject {
     buttons.append(UIAlertAction(title: ButtonOption.exportPalette, style: .default, handler: { _ in
       self.delegate?.exportPalette()
     }))
-  }
-  
-  private func removeColorButton() {
-    if delegate?.currentNumberOfRows ?? 0 > 2 && ((delegate?.canRemoveColor()) == true) {
-      buttons.append(UIAlertAction(title: ButtonOption.removeColor, style: .default, handler: { _ in
-        self.delegate?.removeColor()
-      }))
-    }
   }
   
   private func addColorButton() {

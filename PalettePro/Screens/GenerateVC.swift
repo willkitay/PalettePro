@@ -37,7 +37,7 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   }
   
   private func configureRows() {
-    colorRows = [ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
+    colorRows = [ColorRowVC(isTopRow: true), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
     for colorRow in colorRows {
       addChild(colorRow)
       colorRow.delegate = self
@@ -118,8 +118,8 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
     for row in colorRows { row.removeFromParent() }
     colorRows.removeAll()
 
-    for color in stack.currentColors {
-      let colorRow = ColorRowVC()
+    for (index, color) in stack.currentColors.enumerated() {
+      let colorRow = ColorRowVC(isTopRow: index == 0)
       addChild(colorRow)
       colorRow.delegate = self
       colorRow.updateStack(with: color.0, isLocked: color.1)
@@ -162,6 +162,20 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
     PaletteExporter.exportPalette(colorsToExport: colorsToExport, from: self)
   }
   
+  func removeRow(_ uiViewController: ColorRowVC) {
+    guard colorRows.count > 2 else { return }
+    guard let index = colorRows.firstIndex(where: { $0.view.backgroundColor?.toHex() == uiViewController.view.backgroundColor?.toHex() }) else { return }
+    
+    UIView.animate(withDuration: 0.3) { self.colorRows[index].view.isHidden = true }
+    colorRows.remove(at: index)
+    stack.removeColor(at: index)
+    currentNumberOfRows -= 1
+    uiViewController.removeFromParent()
+    
+    guard let colorRowVC = colorRows.first else { return }
+    colorRowVC.hexLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+  }
+  
   func addColor() {
     guard colorRows.count < Constants.maxNumberOfRows else { return }
     guard currentNumberOfRows < Constants.maxNumberOfRows else { return }
@@ -170,35 +184,16 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
     UIView.animate(withDuration: 0.3) { newRow.view.isHidden = false }
   }
   
-  func canRemoveColor() -> Bool {
-    for row in colorRows { if !row.lockButton.isLocked { return true } }
-    return false
-  }
-  
   private func createNewColorRowVC() -> ColorRowVC {
     let newRow = ColorRowVC()
     newRow.view.isHidden = true
+    newRow.delegate = self
     self.stack.addColor([(newRow.view.backgroundColor?.toHex() ?? "", false)])
     self.colorRows.append(newRow)
     self.stackView.addArrangedSubview(newRow.view)
     currentNumberOfRows += 1
     addChild(newRow)
     return newRow
-  }
-  
-  func removeColor() {
-    guard colorRows.count > 2 else { return }
-    
-    for (index, row) in colorRows.enumerated().reversed() {
-      if !row.lockButton.isLocked {
-        UIView.animate(withDuration: 0.3) { self.colorRows[index].view.isHidden = true }
-        colorRows.remove(at: index)
-        stack.removeColor(at: index)
-        currentNumberOfRows -= 1
-        row.removeFromParent()
-        return
-      }
-    }
   }
   
   private func configureStackView() {
@@ -208,7 +203,6 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
     stackView.clipsToBounds = true
     
     for row in colorRows { stackView.addArrangedSubview(row.view) }
-    
     stack.push(colorRows.map { ($0.hexLabel.text ?? "", $0.lockButton.isLocked) })
   }
   
@@ -217,7 +211,7 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
     
     let tabviewHeight: CGFloat = 50
     NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+      stackView.topAnchor.constraint(equalTo: view.topAnchor),
       stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
       stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
       stackView.bottomAnchor.constraint(equalTo: generateButton.topAnchor),
@@ -226,6 +220,7 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
       generateButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
       generateButton.heightAnchor.constraint(equalToConstant: tabviewHeight),
     ])
+    
   }
   
   private func configureStackButtons() {

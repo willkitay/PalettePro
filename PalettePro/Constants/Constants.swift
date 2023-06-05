@@ -26,4 +26,6 @@ enum Symbols {
 
 enum Images {
   static let emptyBox         = UIImage(named: "empty")
+  static let savedColors      = UIImage(named: "14")
+  static let savedPalettes    = UIImage(named: "15")
 }

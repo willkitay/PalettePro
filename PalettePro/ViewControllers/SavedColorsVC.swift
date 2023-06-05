@@ -11,6 +11,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   private let colorsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   private let containerView = UIView()
+  private let backgroundImage = UIImageView(image: Images.savedColors?.imageWithInsets(insets: UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 30)))
   
   private var colors: [Color] = []
   private var selectedColors: [Color] = []
@@ -34,6 +35,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   override func viewWillAppear(_ animated: Bool) {
     getSavedColors()
     navigationItem.rightBarButtonItem?.isHidden = colors.isEmpty
+    
   }
   
   @objc private func toggleSelectState() {
@@ -200,11 +202,8 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   private func configureColorsCollectionView() {
     view.addSubview(colorsCollectionView)
-    let uiview = UIImageView()
-    uiview.image = Images.emptyBox?.imageWithInsets(insets: UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 30))
-    uiview.contentMode = .scaleAspectFit
-    
-    colorsCollectionView.backgroundView = uiview
+    backgroundImage.contentMode = .scaleAspectFit
+    colorsCollectionView.backgroundView = backgroundImage
     colorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
     colorsCollectionView.dataSource = self
     colorsCollectionView.delegate = self

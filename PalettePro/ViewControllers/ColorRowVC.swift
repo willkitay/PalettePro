@@ -9,6 +9,7 @@ import UIKit
 
 protocol ColorRowVCDelegate: AnyObject {
   func triggerColorShadeChange(previousColor: UIColor?, newColor: UIColor?)
+  func removeRow(_ uiViewController: ColorRowVC)
 }
 
 class ColorRowVC: UIViewController, ColorDetailVCDelegate {
@@ -16,19 +17,22 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
   let hexLabel = ColorRowLabel()
   let lockButton = LockButton()
   let menuButton = UIButton()
+  private var isTopRow: Bool = false
   
   weak var delegate: ColorRowVCDelegate?
   
   override func viewDidLoad() {
-//    print(parent)
-//    parent = RootVCManager.shared
-    
     super.viewDidLoad()
     view.addSubviews(hexLabel, lockButton, menuButton)
     
     generateRandomColor()
     configureLabel()
     configureButtons()
+  }
+  
+  convenience init(isTopRow: Bool) {
+    self.init()
+    self.isTopRow = isTopRow
   }
   
   func didSelectColor(previousColor: UIColor?, newColor: UIColor?) {
@@ -49,7 +53,11 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
       self.present(colorPickerVC, animated: true)
     }
     
-    let menu = UIMenu(children: [viewColor, saveColor, editShades])
+    let removeColor = UIAction(title: "Remove", image: Symbols.trash) { _ in
+      self.delegate?.removeRow(self)
+    }
+    
+    let menu = UIMenu(children: [viewColor, saveColor, editShades, removeColor])
     menuButton.menu = menu
     menuButton.showsMenuAsPrimaryAction = true
   }
@@ -89,9 +97,9 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
     hexLabel.isUserInteractionEnabled = true
     
     NSLayoutConstraint.activate([
-      hexLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 30),
+      hexLabel.topAnchor.constraint(equalTo: isTopRow ? view.safeAreaLayoutGuide.topAnchor : view.topAnchor, constant: isTopRow ? 0 : 30),
       hexLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -30),
+      hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: isTopRow ? -10 : -30),
       hexLabel.widthAnchor.constraint(equalToConstant: 100)
     ])
   }
