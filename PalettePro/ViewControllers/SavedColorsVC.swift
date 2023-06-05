@@ -33,6 +33,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   override func viewWillAppear(_ animated: Bool) {
     getSavedColors()
+    navigationItem.rightBarButtonItem?.isHidden = colors.isEmpty
   }
   
   @objc private func toggleSelectState() {
@@ -61,6 +62,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
     removeSelectedColorsFromCollectionView()
     disableTrashButton()
     toggleSelectState()
+    navigationItem.rightBarButtonItem?.isHidden = colors.isEmpty
   }
   
   private func disableTrashButton() {

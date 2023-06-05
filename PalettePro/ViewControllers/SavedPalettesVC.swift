@@ -7,8 +7,9 @@
 
 import UIKit
 
-class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-  
+
+class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, SavedColorPaletteCellDelegate {
+    
   private var currentDetailPalette = PaletteDetailsVC(colors: [])
 
   private let scrollView = UIScrollView()
@@ -37,6 +38,7 @@ class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectio
     view.addSubview(collectionView)
     collectionView.translatesAutoresizingMaskIntoConstraints = false
     collectionView.backgroundColor = .clear
+    collectionView.delegate = self
     
     NSLayoutConstraint.activate([
       collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: padding),
@@ -78,9 +80,6 @@ class SavedPalettesVC: UIViewController, UICollectionViewDataSource, UICollectio
       self.collectionView.reloadData()
     }
   }
-}
-
-extension SavedPalettesVC {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return savedPalettes.count
@@ -97,7 +96,7 @@ extension SavedPalettesVC {
     palette.widthAnchor.constraint(equalToConstant: collectionView.contentSize.width - 10).isActive = true
     cell.backgroundView = palette
     cell.isUserInteractionEnabled = true
-    
+    cell.delegate = self
     return cell
   }
 
@@ -106,17 +105,48 @@ extension SavedPalettesVC {
     return CGSize(width: cellWidth, height: 40)
   }
   
+  private func showEmptyBackgroundImage() {
+      view.addSubview(backgroundImageView)
+      setEmptyBackgroundImage(Images.emptyBox, backgroundImageView: backgroundImageView)
+  }
+  
+  func delete(_ palette: Palette) {
+    PalettePersistenceManager.updateWith(favorite: palette, actionType: .remove) { _ in }
+    guard let index = savedPalettes.firstIndex(where: { $0.colors == palette.colors }) else { return }
+    savedPalettes.remove(at: index)
+    collectionView.performBatchUpdates({
+      collectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+    }, completion: { _ in
+      if self.savedPalettes.isEmpty {
+        self.showEmptyBackgroundImage()
+      }
+    })
+  }
+  
+  func presentPaletteDetailsVC(colors: [String]) {
+    print("shouldnt be here")
+  }
+}
+
+protocol SavedColorPaletteCellDelegate: AnyObject {
+    func delete(_ palette: Palette)
 }
 
 class SavedColorPaletteCell: UICollectionViewCell {
+  
   let paletteView = SavedColorPalette(frame: .zero)
   
-  private var currentDetailPalette = PaletteDetailsVC(colors: [])
+  weak var delegate: SavedColorPaletteCellDelegate?
   
+  private var currentDetailPalette = PaletteDetailsVC(colors: [])
+    
   override init(frame: CGRect) {
     super.init(frame: frame)
     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap))
     contentView.addGestureRecognizer(tapGesture)
+    
+    let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTap))
+    contentView.addGestureRecognizer(longTapGesture)
   }
   
   required init?(coder: NSCoder) {
@@ -129,6 +159,18 @@ class SavedColorPaletteCell: UICollectionViewCell {
     presentPaletteDetailsVC(colors: colors)
   }
   
+  @objc private func longTap(_ sender: UILongPressGestureRecognizer) {
+    guard let palette = backgroundView as? SavedColorPalette else { return }
+    let colors = palette.colors.map { $0.toHex() }
+    print(colors)
+    
+    let deleteAction = UIAlertAction(title: "Delete Palette?", style: .destructive) { _ in
+      self.delegate?.delete(Palette(colors: colors))
+    }
+    
+    RootVCManager.shared?.deleteAlert(deleteAction: deleteAction, forTitle: "Palette")
+  }
+    
   func presentPaletteDetailsVC(colors: [String]) {
     guard let selectedColor = UIColor(hex: colors[0]) else { return }
     
