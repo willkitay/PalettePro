@@ -163,6 +163,7 @@ fileprivate struct TableSection {
 fileprivate func createCell(name: String, backgroundColor: UIColor? = nil, textColor: UIColor? = nil) -> UITableViewCell {
   let cell = UITableViewCell(style: .default, reuseIdentifier: nil)
   cell.textLabel?.text = name
+  cell.textLabel?.lineBreakMode = .byWordWrapping
   
   if let backgroundColor { cell.backgroundColor = backgroundColor }
   if let textColor { cell.textLabel?.textColor = textColor }

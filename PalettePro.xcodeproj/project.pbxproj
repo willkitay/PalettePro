@@ -546,7 +546,7 @@
 				DEVELOPMENT_TEAM = 5K34VB7KMZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PalettePro/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PalettePro;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftPalette;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -579,7 +579,7 @@
 				DEVELOPMENT_TEAM = 5K34VB7KMZ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PalettePro/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = PalettePro;
+				INFOPLIST_KEY_CFBundleDisplayName = SwiftPalette;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
