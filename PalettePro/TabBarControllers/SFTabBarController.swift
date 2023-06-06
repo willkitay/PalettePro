@@ -1,5 +1,5 @@
 //
-//  PaletteProTabBarController.swift
+//  SFTabBarController.swift
 //  PalettePro
 //
 //  Created by Will Kitay on 5/21/23.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PaletteProTabBarController: UITabBarController {
+class SFTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()

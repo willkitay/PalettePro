@@ -49,7 +49,7 @@
 		D2B53BBF2A0A1F9700B958D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */; };
 		D2B53BC22A0A1F9700B958D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BC02A0A1F9700B958D2 /* LaunchScreen.storyboard */; };
 		D2CBD94B2A1AB8AD00D42AA1 /* SystemColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */; };
-		D2CBD9522A1ABAAA00D42AA1 /* PaletteProTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */; };
+		D2CBD9522A1ABAAA00D42AA1 /* SFTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* SFTabBarController.swift */; };
 		D2FF82AD2A24222F00978A62 /* SystemFontsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */; };
 		D2FF82B12A244E2200978A62 /* SavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B02A244E2200978A62 /* SavedVC.swift */; };
 		D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */; };
@@ -100,7 +100,7 @@
 		D2B53BC12A0A1F9700B958D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2B53BC32A0A1F9700B958D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColorsVC.swift; sourceTree = "<group>"; };
-		D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteProTabBarController.swift; sourceTree = "<group>"; };
+		D2CBD9512A1ABAAA00D42AA1 /* SFTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFTabBarController.swift; sourceTree = "<group>"; };
 		D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFontsVC.swift; sourceTree = "<group>"; };
 		D2FF82B02A244E2200978A62 /* SavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVC.swift; sourceTree = "<group>"; };
 		D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorPalette.swift; sourceTree = "<group>"; };
@@ -267,7 +267,7 @@
 		D2CBD9502A1ABA8400D42AA1 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */,
+				D2CBD9512A1ABAAA00D42AA1 /* SFTabBarController.swift */,
 			);
 			path = TabBarControllers;
 			sourceTree = "<group>";
@@ -384,7 +384,7 @@
 				D2A116172A22E89F00BD85B5 /* UIViewController+Ext.swift in Sources */,
 				D20EA8482A2A899000760EB8 /* SelectState.swift in Sources */,
 				D2A116052A22819C00BD85B5 /* GenerateRandomColor.swift in Sources */,
-				D2CBD9522A1ABAAA00D42AA1 /* PaletteProTabBarController.swift in Sources */,
+				D2CBD9522A1ABAAA00D42AA1 /* SFTabBarController.swift in Sources */,
 				D20EA8422A2845D600760EB8 /* ColorPersistenceManager.swift in Sources */,
 				D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */,
 				D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */,

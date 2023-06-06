@@ -45,8 +45,8 @@ class PaletteTabBar: UIView {
   }
   
   func setTabBarColors(_ colors: [String]) {
-    colorButtons.removeAll()
     colorButtons.forEach { $0.removeFromSuperview() }
+    colorButtons.removeAll()
 
     for color in colors {
       let button = createButton(with: UIColor(hex: color))
