@@ -20,11 +20,7 @@ class PaletteTabBar: UIView {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    layer.cornerRadius = 10
-    layer.borderWidth = 0.75
-    layer.borderColor = UIColor.systemGray5.cgColor
-    layer.masksToBounds = true
-    translatesAutoresizingMaskIntoConstraints = false
+    configureView()
     configureStackView()
   }
   
@@ -32,33 +28,40 @@ class PaletteTabBar: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  private func configureView() {
+    layer.cornerRadius = 10
+    layer.borderWidth = 0.75
+    layer.borderColor = UIColor.systemGray5.cgColor
+    layer.masksToBounds = true
+    translatesAutoresizingMaskIntoConstraints = false
+  }
+  
   func configureStackView() {
+    addSubview(stackView)
     stackView.axis = .horizontal
     stackView.distribution = .fillEqually
     stackView.translatesAutoresizingMaskIntoConstraints = false
-    addSubview(stackView)
-    
-    NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: topAnchor),
-      stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: trailingAnchor),
-      stackView.bottomAnchor.constraint(equalTo: bottomAnchor)
-    ])
+    stackView.pinToEdges(of: self)
   }
   
   func setTabBarColors(_ colors: [String]) {
-    colorButtons.forEach { $0.removeFromSuperview() }
     colorButtons.removeAll()
+    colorButtons.forEach { $0.removeFromSuperview() }
 
     for color in colors {
-      let button = UIButton(type: .system)
-      button.backgroundColor = UIColor(hex: color)
-      button.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
+      let button = createButton(with: UIColor(hex: color))
       stackView.addArrangedSubview(button)
       colorButtons.append(button)
     }
 
     dotIndicator.setDotIndicator(on: colorButtons.first)
+  }
+  
+  private func createButton(with color: UIColor?) -> UIButton {
+    let button = UIButton(type: .system)
+    button.backgroundColor = color
+    button.addTarget(self, action: #selector(colorButtonTapped), for: .touchUpInside)
+    return button
   }
   
   @objc private func colorButtonTapped(_ sender: UIButton) {
@@ -67,6 +70,3 @@ class PaletteTabBar: UIView {
     dotIndicator.setDotIndicator(on: sender)
   }
 }
-
-
-

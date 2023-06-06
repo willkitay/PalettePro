@@ -8,6 +8,7 @@
 import UIKit
 
 extension UIImage {
+  
   func imageWithInsets(insets: UIEdgeInsets) -> UIImage? {
     UIGraphicsBeginImageContextWithOptions(
       CGSize(width: self.size.width + insets.left + insets.right,
@@ -19,4 +20,5 @@ extension UIImage {
     UIGraphicsEndImageContext()
     return imageWithInsets
   }
+  
 }

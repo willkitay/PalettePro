@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D20ADCFB2A2EA084004973AD /* SavedPaletteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20ADCFA2A2EA084004973AD /* SavedPaletteCell.swift */; };
 		D20EA83A2A26E62200760EB8 /* PalettePersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */; };
 		D20EA83C2A27B55900760EB8 /* SavedPalettesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */; };
 		D20EA8402A283A6800760EB8 /* SavedColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */; };
@@ -48,16 +49,14 @@
 		D2B53BBF2A0A1F9700B958D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BBE2A0A1F9700B958D2 /* Assets.xcassets */; };
 		D2B53BC22A0A1F9700B958D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D2B53BC02A0A1F9700B958D2 /* LaunchScreen.storyboard */; };
 		D2CBD94B2A1AB8AD00D42AA1 /* SystemColorsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */; };
-		D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */; };
+		D2CBD9522A1ABAAA00D42AA1 /* PaletteProTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */; };
 		D2FF82AD2A24222F00978A62 /* SystemFontsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */; };
 		D2FF82B12A244E2200978A62 /* SavedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B02A244E2200978A62 /* SavedVC.swift */; };
-		D2FF82B32A244E3000978A62 /* AIVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B22A244E3000978A62 /* AIVC.swift */; };
 		D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */; };
-		D2FF82BA2A25A4E400978A62 /* SectionLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82B92A25A4E400978A62 /* SectionLabel.swift */; };
-		D2FF82BC2A25A70800978A62 /* SeeMoreButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D20ADCFA2A2EA084004973AD /* SavedPaletteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPaletteCell.swift; sourceTree = "<group>"; };
 		D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PalettePersistenceManager.swift; sourceTree = "<group>"; };
 		D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedPalettesVC.swift; sourceTree = "<group>"; };
 		D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorsVC.swift; sourceTree = "<group>"; };
@@ -101,13 +100,10 @@
 		D2B53BC12A0A1F9700B958D2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D2B53BC32A0A1F9700B958D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D2CBD94A2A1AB8AD00D42AA1 /* SystemColorsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemColorsVC.swift; sourceTree = "<group>"; };
-		D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTabBarControllerViewController.swift; sourceTree = "<group>"; };
+		D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteProTabBarController.swift; sourceTree = "<group>"; };
 		D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemFontsVC.swift; sourceTree = "<group>"; };
 		D2FF82B02A244E2200978A62 /* SavedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedVC.swift; sourceTree = "<group>"; };
-		D2FF82B22A244E3000978A62 /* AIVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIVC.swift; sourceTree = "<group>"; };
 		D2FF82B42A2555F700978A62 /* SavedColorPalette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedColorPalette.swift; sourceTree = "<group>"; };
-		D2FF82B92A25A4E400978A62 /* SectionLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionLabel.swift; sourceTree = "<group>"; };
-		D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeeMoreButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,13 +117,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D20ADCFC2A2EA09E004973AD /* SavedPalettesVC */ = {
+			isa = PBXGroup;
+			children = (
+				D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */,
+				D20ADCFA2A2EA084004973AD /* SavedPaletteCell.swift */,
+			);
+			path = SavedPalettesVC;
+			sourceTree = "<group>";
+		};
 		D20EA8382A26E60D00760EB8 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
 				D20EA8392A26E62200760EB8 /* PalettePersistenceManager.swift */,
-				D20EA84B2A2D102000760EB8 /* RootVCManager.swift */,
 				D20EA8412A2845D600760EB8 /* ColorPersistenceManager.swift */,
 				D25A0DBE2A1E927B00B71EF6 /* OptionsManager.swift */,
+				D20EA84B2A2D102000760EB8 /* RootVCManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -149,7 +154,7 @@
 				D242DFA22A1AF2C900E27350 /* ColorRowVC.swift */,
 				D2A115F62A1FF58E00BD85B5 /* PaletteDetailsVC.swift */,
 				D2A116102A22E6BA00BD85B5 /* CopyAlertVC.swift */,
-				D20EA83B2A27B55900760EB8 /* SavedPalettesVC.swift */,
+				D20ADCFC2A2EA09E004973AD /* SavedPalettesVC */,
 				D20EA83F2A283A6800760EB8 /* SavedColorsVC.swift */,
 				D242DFB72A1D3E7A00E27350 /* ColorPickerVC.swift */,
 			);
@@ -227,7 +232,6 @@
 				D2FF82AC2A24222F00978A62 /* SystemFontsVC.swift */,
 				D2B53BB92A0A1F9600B958D2 /* GenerateVC.swift */,
 				D2FF82B02A244E2200978A62 /* SavedVC.swift */,
-				D2FF82B22A244E3000978A62 /* AIVC.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -263,7 +267,7 @@
 		D2CBD9502A1ABA8400D42AA1 /* TabBarControllers */ = {
 			isa = PBXGroup;
 			children = (
-				D2CBD9512A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift */,
+				D2CBD9512A1ABAAA00D42AA1 /* PaletteProTabBarController.swift */,
 			);
 			path = TabBarControllers;
 			sourceTree = "<group>";
@@ -272,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				D242DFA42A1AF73600E27350 /* ColorRowLabel.swift */,
-				D2FF82B92A25A4E400978A62 /* SectionLabel.swift */,
 			);
 			path = Labels;
 			sourceTree = "<group>";
@@ -284,7 +287,6 @@
 				D2A115FB2A20604400BD85B5 /* ColorCode.swift */,
 				D242DFB12A1C4C8500E27350 /* StackButton.swift */,
 				D242DFA82A1B23B100E27350 /* LockButton.swift */,
-				D2FF82BB2A25A70800978A62 /* SeeMoreButton.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -363,12 +365,10 @@
 				D2A1160D2A22AE7F00BD85B5 /* ColorCombo.swift in Sources */,
 				D242DFA72A1AF97900E27350 /* UIView+Ext.swift in Sources */,
 				D2A116112A22E6BA00BD85B5 /* CopyAlertVC.swift in Sources */,
-				D2FF82B32A244E3000978A62 /* AIVC.swift in Sources */,
 				D2A116092A2281EE00BD85B5 /* ToHex.swift in Sources */,
 				D2A116012A2280F100BD85B5 /* HSB.swift in Sources */,
 				D2A115F72A1FF58E00BD85B5 /* PaletteDetailsVC.swift in Sources */,
 				D2A116072A2281C600BD85B5 /* FromHex.swift in Sources */,
-				D2FF82BC2A25A70800978A62 /* SeeMoreButton.swift in Sources */,
 				D242DFBA2A1DD9DF00E27350 /* DotIndicator.swift in Sources */,
 				D20EA83A2A26E62200760EB8 /* PalettePersistenceManager.swift in Sources */,
 				D2FF82B52A2555F700978A62 /* SavedColorPalette.swift in Sources */,
@@ -384,14 +384,14 @@
 				D2A116172A22E89F00BD85B5 /* UIViewController+Ext.swift in Sources */,
 				D20EA8482A2A899000760EB8 /* SelectState.swift in Sources */,
 				D2A116052A22819C00BD85B5 /* GenerateRandomColor.swift in Sources */,
-				D2CBD9522A1ABAAA00D42AA1 /* PTabBarControllerViewController.swift in Sources */,
+				D2CBD9522A1ABAAA00D42AA1 /* PaletteProTabBarController.swift in Sources */,
 				D20EA8422A2845D600760EB8 /* ColorPersistenceManager.swift in Sources */,
 				D2B53BBA2A0A1F9600B958D2 /* GenerateVC.swift in Sources */,
 				D242DFA52A1AF73600E27350 /* ColorRowLabel.swift in Sources */,
 				D2B53BB62A0A1F9600B958D2 /* AppDelegate.swift in Sources */,
 				D242DFB82A1D3E7A00E27350 /* ColorPickerVC.swift in Sources */,
-				D2FF82BA2A25A4E400978A62 /* SectionLabel.swift in Sources */,
 				D242DFB22A1C4C8500E27350 /* StackButton.swift in Sources */,
+				D20ADCFB2A2EA084004973AD /* SavedPaletteCell.swift in Sources */,
 				D25A0DBF2A1E927B00B71EF6 /* OptionsManager.swift in Sources */,
 				D242DF9C2A1ADCFB00E27350 /* GenerateButton.swift in Sources */,
 				D2FF82B12A244E2200978A62 /* SavedVC.swift in Sources */,

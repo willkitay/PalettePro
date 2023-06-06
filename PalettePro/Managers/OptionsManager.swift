@@ -67,7 +67,7 @@ class OptionsManager: NSObject {
   }
   
   private func addColorButton() {
-    if delegate?.currentNumberOfRows != Constants.maxNumberOfRows {
+    if delegate?.currentNumberOfRows != Constants.maxRowCount {
       buttons.append(UIAlertAction(title: ButtonOption.addColor, style: .default, handler: { _ in
         self.delegate?.addColor()
       }))

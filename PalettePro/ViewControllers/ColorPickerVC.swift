@@ -41,25 +41,13 @@ class ColorPickerVC: UIViewController {
     stackView.translatesAutoresizingMaskIntoConstraints = false
     stackView.axis = .vertical
     stackView.distribution = .fillEqually
+    stackView.pinToEdges(of: view)
 
-    addColors()
-
-    NSLayoutConstraint.activate([
-      stackView.topAnchor.constraint(equalTo: view.topAnchor),
-      stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-      stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-      stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-    ])
-    
-    addTapGestureToStackColors()
-  }
-  
-  private func addColors() {
     addTintColorsToStack()
     addCurrentColorToStack()
     addShadeColorsToStack()
+    addTapGestureToStackColors()
   }
-  
   
   private func addTintColorsToStack() {
     guard let currentColorHex else { return }
@@ -73,7 +61,8 @@ class ColorPickerVC: UIViewController {
       colorSubviews.append(createColorRowSubView(with: currentColor))
     }
     
-    for colorSubview in colorSubviews.reversed() { stackView.addArrangedSubview(colorSubview) }
+    for colorSubview in colorSubviews.reversed() { stackView.addArrangedSubview(colorSubview)
+    }
   }
 
   private func addShadeColorsToStack() {
@@ -117,7 +106,7 @@ class ColorPickerVC: UIViewController {
     delegate?.didSelectColor(previousColor: previousColor, newColor: newColor)
     self.currentColorHex = newColor.toHex()
     
-    dotIndicator.setDotIndicator(on: tappedView)
+    Task { self.dotIndicator.setDotIndicator(on: tappedView) }
   }
   
 }

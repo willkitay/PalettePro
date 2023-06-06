@@ -11,11 +11,11 @@ import UIKit
 
 class CopyAlertVC: UIViewController {
   
-  let backgroundView = UIView()
-  let actionButton = UIButton()
+  private let backgroundView = UIView()
+  private let actionButton = UIButton()
   
-  let buttonWidth: CGFloat = 150
-  let buttonHeight: CGFloat = 60
+  private let buttonWidth: CGFloat = 150
+  private let buttonHeight: CGFloat = 60
   
   init() {
     super.init(nibName: nil, bundle: nil)

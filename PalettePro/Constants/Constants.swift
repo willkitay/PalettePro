@@ -8,8 +8,8 @@
 import UIKit
 
 enum Constants {
-  static let maxNumberOfRows: Int     = 8
-  static let defaultNumberOfRows: Int = 5
+  static let maxRowCount: Int     = 7
+  static let defaultRowCount: Int = 5
 }
 
 enum Symbols {
@@ -22,6 +22,11 @@ enum Symbols {
   static let eye              = UIImage(systemName: "eye")
   static let grid3x3          = UIImage(systemName: "square.grid.3x3")
   static let trash            = UIImage(systemName: "trash")
+  static let leftArrow        = UIImage(systemName: "arrow.left")
+  static let rightArrow       = UIImage(systemName: "arrow.right")
+  static let locked           = UIImage(systemName: "lock.fill")
+  static let unlocked         = UIImage(systemName: "lock.open.fill")
+  static let checkmarked      = UIImage(systemName: "checkmark.circle.fill")
 }
 
 enum Images {

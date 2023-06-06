@@ -1,5 +1,5 @@
 //
-//  PersistenceManager.swift
+//  PalettePersistenceManager.swift
 //  PalettePro
 //
 //  Created by Will Kitay on 5/30/23.

@@ -8,6 +8,8 @@
 import UIKit
 
 class LockButton: UIButton {
+  
+  let impact = UIImpactFeedbackGenerator(style: .medium)
 
   var isLocked: Bool = false {
     didSet {
@@ -33,10 +35,11 @@ class LockButton: UIButton {
     addTarget(self, action: #selector(toggleLock), for: .touchUpInside)
     
     let configuration = UIImage.SymbolConfiguration(font: .preferredFont(forTextStyle: .title2))
-    let imageName = isLocked ? "lock.fill" : "lock.open.fill"
     let lockColor: UIColor = isLocked ? getContrastTextColor(for: superview?.backgroundColor) : .systemGray4
+        
+    let image = isLocked ? Symbols.locked : Symbols.unlocked
+    let lockImage = image?.withConfiguration(configuration).withTintColor(lockColor, renderingMode: .alwaysOriginal)
     
-    let lockImage = UIImage(systemName: imageName, withConfiguration: configuration)?.withTintColor(lockColor, renderingMode: .alwaysOriginal)
     setBackgroundImage(lockImage, for: .normal)
     
     translatesAutoresizingMaskIntoConstraints = false
@@ -44,6 +47,7 @@ class LockButton: UIButton {
   
   @objc func toggleLock() {
     isLocked.toggle()
+    impact.impactOccurred()
   }
   
 }

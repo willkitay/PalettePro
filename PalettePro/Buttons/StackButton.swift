@@ -37,20 +37,20 @@ class StackButton: UIButton {
   }
   
   func configure() {
-    let imageName = direction == .left ? "arrow.left" : "arrow.right"
-    setImage(UIImage(systemName: imageName)?.withTintColor(.label, renderingMode: .alwaysOriginal), for: .normal)
-    setImage(UIImage(systemName: imageName)?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), for: .highlighted)
+    let image = direction == .left ? Symbols.leftArrow : Symbols.rightArrow
+    setImage(image?.withTintColor(.label, renderingMode: .alwaysOriginal), for: .normal)
+    setImage(image?.withTintColor(.systemGray, renderingMode: .alwaysOriginal), for: .highlighted)
     translatesAutoresizingMaskIntoConstraints = false
   }
   
   func setDisabledState(_ isDisabled: Bool) {
-    let imageName = direction == .left ? "arrow.left" : "arrow.right"
+    let image = direction == .left ? Symbols.leftArrow : Symbols.rightArrow
     if isDisabled {
-      let grayImage = UIImage(systemName: imageName)?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
+      let grayImage = image?.withTintColor(.systemGray, renderingMode: .alwaysOriginal)
       setImage(grayImage, for: .normal)
       setImage(grayImage, for: .highlighted)
     } else {
-      let defaultImage = UIImage(systemName: imageName)?.withTintColor(.label, renderingMode: .alwaysOriginal)
+      let defaultImage = image?.withTintColor(.label, renderingMode: .alwaysOriginal)
       setImage(defaultImage, for: .normal)
       setImage(defaultImage, for: .highlighted)
     }

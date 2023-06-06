@@ -59,10 +59,8 @@ class SystemFontsVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
 fileprivate func createCell(name: String, font: UIFont) -> UITableViewCell {
   let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-  
   cell.textLabel?.font = font
   cell.textLabel?.text = name
   cell.detailTextLabel?.text = "system size \(Int(font.pointSize))"
-  
   return cell
 }

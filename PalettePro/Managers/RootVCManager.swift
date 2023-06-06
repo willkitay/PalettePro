@@ -1,5 +1,5 @@
 //
-//  AlertManager.swift
+//  RootVCManager.swift
 //  PalettePro
 //
 //  Created by Will Kitay on 6/4/23.

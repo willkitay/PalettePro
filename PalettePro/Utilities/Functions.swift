@@ -7,18 +7,10 @@
 
 import UIKit
 
-
-
 func getComplementaryColors(from color: UIColor) -> [UIColor] {
-  // Get the HSB values of the input color
   let hsb = color.toHSB()
-  
-  // Calculate the complementary hue
   let complementaryHue = (hsb.h + 0.5).truncatingRemainder(dividingBy: 1.0)
-  
-  // Create complementary color using the calculated hue and original saturation/brightness values
   let complementaryColor = UIColor(hue: complementaryHue, saturation: hsb.s, brightness: hsb.b, alpha: 1.0)
-  
   return [complementaryColor, color]
 }
 
@@ -27,7 +19,6 @@ func getContrastTextColor(for backgroundColor: UIColor?) -> UIColor {
 }
 
 func hexToCMYK(hexCode: String) -> (c: Int, m: Int, y: Int, k: Int)? {
-  // Remove the '#' symbol if present
   var hex = hexCode
   if hex.hasPrefix("#") {
     hex = String(hex.dropFirst())

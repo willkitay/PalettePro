@@ -11,7 +11,6 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   private let colorsCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   private let containerView = UIView()
-  private let backgroundImage = UIImageView(image: Images.savedColors?.imageWithInsets(insets: UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 30)))
   
   private var colors: [Color] = []
   private var selectedColors: [Color] = []
@@ -35,9 +34,8 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   override func viewWillAppear(_ animated: Bool) {
     getSavedColors()
     navigationItem.rightBarButtonItem?.isHidden = colors.isEmpty
-    
   }
-  
+    
   @objc private func toggleSelectState() {
     selectState = selectState == .select ? .cancel : .select
     navigationItem.rightBarButtonItem?.title = selectState.string
@@ -48,7 +46,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   private func configureNavigationBar() {
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: selectState.string, style: .plain, target: self, action: #selector(toggleSelectState))
-    navigationItem.rightBarButtonItem?.tintColor = .systemGreen
+    navigationItem.rightBarButtonItem?.tintColor = .systemCyan
     
     navigationItem.leftBarButtonItem = UIBarButtonItem(image: Symbols.trash, style: .plain, target: self, action: #selector(deleteSelectedColors))
     navigationItem.leftBarButtonItem?.isHidden = true
@@ -177,7 +175,7 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   }
   
   private func createSelectedCellBadge(for cell: UICollectionViewCell) -> UIView {
-    let badgeImageView = UIImageView(image: UIImage(systemName: "checkmark.circle.fill"))
+    let badgeImageView = UIImageView(image: Symbols.checkmarked)
     badgeImageView.translatesAutoresizingMaskIntoConstraints = false
     badgeImageView.tintColor = getContrastTextColor(for: cell.backgroundColor)
     return badgeImageView
@@ -202,39 +200,46 @@ class SavedColorsVC: UIViewController, UICollectionViewDataSource, UICollectionV
   
   private func configureColorsCollectionView() {
     view.addSubview(colorsCollectionView)
-    backgroundImage.contentMode = .scaleAspectFit
-    colorsCollectionView.backgroundView = backgroundImage
+    
+    colorsCollectionView.backgroundView = createBackgroundImage()
+    colorsCollectionView.collectionViewLayout = createFlowLayout()
     colorsCollectionView.translatesAutoresizingMaskIntoConstraints = false
     colorsCollectionView.dataSource = self
     colorsCollectionView.delegate = self
     colorsCollectionView.backgroundColor = .systemBackground
     colorsCollectionView.allowsMultipleSelection = true
     colorsCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ColorCell")
-    
+    colorsCollectionView.pinToEdges(of: containerView)
+  }
+  
+  private func createFlowLayout() -> UICollectionViewFlowLayout {
     let layout = UICollectionViewFlowLayout()
     layout.minimumInteritemSpacing = padding
     layout.minimumLineSpacing = padding
     layout.sectionInset = UIEdgeInsets(top: padding, left: padding, bottom: padding, right: padding)
     layout.scrollDirection = .vertical
-    colorsCollectionView.collectionViewLayout = layout
-    
-    NSLayoutConstraint.activate([
-      colorsCollectionView.topAnchor.constraint(equalTo: containerView.topAnchor),
-      colorsCollectionView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-      colorsCollectionView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-      colorsCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor)
-    ])
+    return layout
+  }
+  
+  private func createBackgroundImage() -> UIImageView {
+    let insets = UIEdgeInsets(top: 30, left: 20, bottom: 30, right: 30)
+    let image = Images.savedColors?.imageWithInsets(insets: insets)
+    let backgroundImage = UIImageView(image: image)
+    backgroundImage.contentMode = .scaleAspectFit
+    return backgroundImage
   }
 }
 
 extension SavedColorsVC {
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    UIView.animate(withDuration: 0.2) {
-      if self.colors.count > 0 {
-        self.colorsCollectionView.backgroundView?.isHidden = true
-      } else {
-        self.colorsCollectionView.backgroundView?.isHidden = false
+    Task {
+      UIView.animate(withDuration: 0.2) {
+        if self.colors.count > 0 {
+          self.colorsCollectionView.backgroundView?.isHidden = true
+        } else {
+          self.colorsCollectionView.backgroundView?.isHidden = false
+        }
       }
     }
     return colors.count

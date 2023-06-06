@@ -99,7 +99,7 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
     NSLayoutConstraint.activate([
       hexLabel.topAnchor.constraint(equalTo: isTopRow ? view.safeAreaLayoutGuide.topAnchor : view.topAnchor, constant: isTopRow ? 0 : 30),
       hexLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 30),
-      hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: isTopRow ? -10 : -30),
+      hexLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: isTopRow ? 0 : -30),
       hexLabel.widthAnchor.constraint(equalToConstant: 100)
     ])
   }
@@ -109,7 +109,7 @@ class ColorRowVC: UIViewController, ColorDetailVCDelegate {
   }
   
   func configureButtons() {
-    menuButton.setImage(UIImage(systemName: "ellipsis"), for: .normal)
+    menuButton.setImage(Symbols.ellipsis, for: .normal)
     menuButton.setPreferredSymbolConfiguration(.init(textStyle: .title2), forImageIn: .normal)
     menuButton.tintColor = .systemGray4
     menuButton.translatesAutoresizingMaskIntoConstraints = false

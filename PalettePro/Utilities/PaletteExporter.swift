@@ -18,7 +18,7 @@ class PaletteExporter {
       try jsonData.write(to: fileURL)
       let activityViewController = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
       
-      viewController.present(activityViewController, animated: true, completion: nil)
+      viewController.present(activityViewController, animated: true)
     } catch {
       print("Failed to export the palette as JSON: \(error)")
     }

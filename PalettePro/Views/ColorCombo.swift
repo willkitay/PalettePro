@@ -15,8 +15,8 @@ class ColorCombo: UIStackView {
   
   weak var delegate: ColorComboDelegate?
   var background: UIColor!
-  var colors: [UIColor] = []
   
+  private var colors: [UIColor] = []
   private let containerView = UIView()
   private let horizontalStack = UIStackView()
   private let titleLabel = UILabel()
@@ -44,9 +44,9 @@ class ColorCombo: UIStackView {
   
   func set(colors: [UIColor]) {
     self.colors = colors
-    horizontalStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     titleLabel.textColor = getContrastTextColor(for: background).withAlphaComponent(0.5)
     
+    horizontalStack.arrangedSubviews.forEach { $0.removeFromSuperview() }
     for color in colors {
       horizontalStack.addArrangedSubview(createColorButton(with: color))
     }
@@ -71,8 +71,6 @@ class ColorCombo: UIStackView {
   
   private func configureContainerView() {
     addArrangedSubview(containerView)
-    containerView.addSubview(titleLabel)
-    containerView.addSubview(horizontalStack)
     
     NSLayoutConstraint.activate([
       containerView.leadingAnchor.constraint(equalTo: leadingAnchor),
@@ -81,6 +79,7 @@ class ColorCombo: UIStackView {
   }
   
   private func configureTitleLabel() {
+    containerView.addSubview(titleLabel)
     titleLabel.translatesAutoresizingMaskIntoConstraints = false
     titleLabel.font = .boldSystemFont(ofSize: 12)
     titleLabel.textAlignment = .left
@@ -93,6 +92,8 @@ class ColorCombo: UIStackView {
   }
   
   private func configureStackView() {
+    containerView.addSubview(horizontalStack)
+
     horizontalStack.translatesAutoresizingMaskIntoConstraints = false
     horizontalStack.axis = .horizontal
     horizontalStack.distribution = .fillEqually

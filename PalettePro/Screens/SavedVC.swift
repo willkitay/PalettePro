@@ -11,7 +11,6 @@ class SavedVC: UIViewController {
   
   let savedPalettesVC = SavedPalettesVC()
   let savedColorsVC = SavedColorsVC()
-  let containerView = UIView()
   let segmentedControl = UISegmentedControl()
   
   private var pageViewController: UIPageViewController!
@@ -42,14 +41,18 @@ class SavedVC: UIViewController {
       bottomBarContainer.heightAnchor.constraint(equalToConstant: 50)
     ])
     
+    bottomBarContainer.addSubview(segmentedControl)
+    configureSegmentedController()
+    segmentedControl.pinToEdges(of: bottomBarContainer)
+  }
+  
+  private func configureSegmentedController() {
     segmentedControl.backgroundColor = .systemBackground
     segmentedControl.insertSegment(withTitle: "Colors", at: 0, animated: false)
     segmentedControl.insertSegment(withTitle: "Palettes", at: 1, animated: false)
     segmentedControl.selectedSegmentIndex = 0
     segmentedControl.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
     segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-    bottomBarContainer.addSubview(segmentedControl)
-    segmentedControl.pinToEdges(of: bottomBarContainer)
   }
   
   private func configurePageViewController() {

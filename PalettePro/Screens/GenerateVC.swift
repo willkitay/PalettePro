@@ -19,7 +19,7 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   let generateButton = GenerateButton()
   let optionsHandler = OptionsManager()
 
-  var currentNumberOfRows: Int = Constants.defaultNumberOfRows
+  var currentNumberOfRows: Int = Constants.defaultRowCount
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -37,7 +37,7 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   }
   
   private func configureRows() {
-    colorRows = [ColorRowVC(isTopRow: true), ColorRowVC(), ColorRowVC(), ColorRowVC(), ColorRowVC()]
+    colorRows = [ColorRowVC(isTopRow: true), ColorRowVC(), ColorRowVC(), ColorRowVC()]
     for colorRow in colorRows {
       addChild(colorRow)
       colorRow.delegate = self
@@ -93,7 +93,6 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   @objc func triggerLeftArrowButton() {
     guard stack.canDecrement else { return }
     updateLockStates()
-    
     stack.decrement()
     updateStackViewColors()
     updateArrowButtonsAppearance()
@@ -102,7 +101,6 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   @objc func triggerRightArrowButton() {
     guard stack.canIncrement else { return }
     updateLockStates()
-    
     stack.increment()
     updateStackViewColors()
     updateArrowButtonsAppearance()
@@ -177,8 +175,8 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
   }
   
   func addColor() {
-    guard colorRows.count < Constants.maxNumberOfRows else { return }
-    guard currentNumberOfRows < Constants.maxNumberOfRows else { return }
+    guard colorRows.count < Constants.maxRowCount else { return }
+    guard currentNumberOfRows < Constants.maxRowCount else { return }
     
     let newRow = createNewColorRowVC()
     UIView.animate(withDuration: 0.3) { newRow.view.isHidden = false }
@@ -256,8 +254,4 @@ class GenerateVC: UIViewController, OptionsHandlerDelegate, ColorRowVCDelegate {
       optionsButton.centerYAnchor.constraint(equalTo: generateButton.centerYAnchor),
     ])
   }
-}
-
-class ColorRowTapGestureRecognizer: UITapGestureRecognizer {
-  var hex: String?
 }
