@@ -6,3 +6,11 @@ A UIKit iOS utility app to help devs generate and preview color schemes for thei
 | :-------------------------:|:-------------------------:|:-------------------------:|
 ![4](/Screenshots/4.jpg)|![5](/Screenshots/5.jpg)|![6](/Screenshots/6.jpg)
 
+- Create color schemes quickly and easily 
+- Save favorite colors or palettes to look at later
+- Export palettes, check text contrast
+- Quickly identify the best system color or font size to use 
+
+> Built with UIKit
+
+> MVC architecture
